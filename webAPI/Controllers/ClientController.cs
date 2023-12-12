@@ -11,12 +11,10 @@ namespace webAPI.Controllers
     public class ClientController : ControllerBase
     {
 
-        private readonly ILogger<ClientController> _logger;
         private readonly IClientCRUDService _clientCRUDService;
 
-        public ClientController(ILogger<ClientController> logger, IClientCRUDService clientCRUDService)
+        public ClientController(IClientCRUDService clientCRUDService)
         {
-            _logger = logger;
             _clientCRUDService = clientCRUDService;
         }
 
