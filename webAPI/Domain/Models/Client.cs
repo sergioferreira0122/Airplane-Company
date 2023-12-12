@@ -8,5 +8,10 @@ namespace webAPI.Domain.Models
     {
         [Key] public int Id { get; set; }
         [Required(AllowEmptyStrings = false)] public string Name { get; set; }//TODO: Ver porque allow empty strins nao funciona
+
+        public override string ToString()
+        {
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}}}";
+        }
     }
 }
