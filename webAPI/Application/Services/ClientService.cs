@@ -4,16 +4,17 @@ using webAPI.Application.DTOs;
 using webAPI.Application.Mappers;
 using webAPI.Controllers;
 using webAPI.Domain.Models;
+using webAPI.Infrastructure.Repositories;
 
 namespace webAPI.Application.Services
 {
     public class ClientService : IClientCRUDService
     {
         private readonly ILogger<ClientController> _logger;
-        private readonly IRepository _clientRepository;
+        private readonly IRepository<Client> _clientRepository;
         private readonly IClientMapper _clientMapper;
 
-        public ClientService(ILogger<ClientController> logger ,IRepository clientRepository, IClientMapper clientMapper)
+        public ClientService(ILogger<ClientController> logger , IRepository<Client> clientRepository, IClientMapper clientMapper)
         {
             _logger = logger;
             _clientRepository = clientRepository;
@@ -61,7 +62,7 @@ namespace webAPI.Application.Services
             _logger.LogInformation("GET ALL");
 
             return _clientMapper.
-                MapClientListToClientDTOList(_clientRepository.getAll().ToList());
+                MapClientListToClientDTOList(_clientRepository.FindAll().ToList());
         }
 
         public ClientDTO GetById(int id)
@@ -75,7 +76,7 @@ namespace webAPI.Application.Services
 
         private Client GetClientNullable(int id)   
         {
-            Client? client = _clientRepository.GetById(id) ?? throw new HttpResponseException(HttpStatusCode.NotFound);
+            Client? client = _clientRepository.FindById(id) ?? throw new HttpResponseException(HttpStatusCode.NotFound);
             //TODO: Ver como atirar exçecões com http codes
 
             return client;
