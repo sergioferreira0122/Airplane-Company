@@ -21,35 +21,37 @@ namespace webAPI.Controllers
         [HttpGet()]
         public IActionResult Get()
         {
-            return Ok(_clientCRUDService.GetAll());
+            Result<List<ClientDTO>> result = _clientCRUDService.GetAll();
+            return StatusCode(result.HttpCode, result.Data);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok(_clientCRUDService.GetById(id));
+            Result<ClientDTO> result = _clientCRUDService.GetById(id);
+            return StatusCode(result.HttpCode, result.Data);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _clientCRUDService.Delete(id);
-            return Ok();
+            Result<ClientDTO> result = _clientCRUDService.Delete(id);
+            return StatusCode(result.HttpCode, result.Data);
         }
 
 
         [HttpPost()]
         public IActionResult Post(ClientDTO newClientDTO)
         {
-            _clientCRUDService.Add(newClientDTO);
-            return Ok();
+            Result<ClientDTO> result = _clientCRUDService.Add(newClientDTO);
+            return StatusCode(result.HttpCode, result.Data);
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ClientDTO updatedClientDTO)
         {
-            _clientCRUDService.Edit(id, updatedClientDTO);
-            return Ok();
+            Result<ClientDTO> result = _clientCRUDService.Edit(id, updatedClientDTO);
+            return StatusCode(result.HttpCode, result.Data);
         }
 
     }

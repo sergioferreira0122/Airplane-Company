@@ -9,16 +9,13 @@ namespace webAPI.Domain.Models
     {
         [Key] 
         public int Id { get; set; }
-        [Required] 
 
-        public Destination Destination { get; set; }
+        public required Destination Destination { get; set; }
 
-        public List<Client> Client { get; set; }
+        public List<Client>? Client { get; set; }
 
-        [Required] 
-        public DateTime StartDate { get; set; }
+        public required DateTime StartDate { get; set; }
 
-        [Required] 
-        public DateTime EndDate { get; set; }
+        public required DateTime EndDate { get; set; }
     }
 }

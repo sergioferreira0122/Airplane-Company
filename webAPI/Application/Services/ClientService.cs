@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using System.Net;
 using System.Web.Http;
 using webAPI.Application.DTOs;
 using webAPI.Application.Mappers;
@@ -21,33 +22,44 @@ namespace webAPI.Application.Services
             _clientMapper = clientMapper;
         }
 
-        public void Add(ClientDTO clientDTO)
+        public Result<ClientDTO> Add(ClientDTO clientDTO)
         {
             Client client = _clientMapper.MapClientDTOToClient(clientDTO);
 
+            bool responseFromRepository = _clientRepository.Add(client);
+
             _logger.LogInformation("INSERT: " + client.ToString());
-
-            _clientRepository.Add(client);
+            return responseFromRepository ? new Result<ClientDTO>(200, clientDTO) : new Result<ClientDTO>(500);
         }
 
-        public void Delete(int id)
+        public Result<ClientDTO> Delete(int id)
         {
-            Client clientFromRepo = GetClientNullable(id);
+            Result<Client> result = GetClientNullable(id);
+            if (result.Data == null) { return new Result<ClientDTO>(404); }
 
-            _logger.LogInformation("DELETE: " + clientFromRepo.ToString());
+            Client clientFromRepository = result.Data;
+            ClientDTO clientDTO = _clientMapper.MapClientToClientDTO(clientFromRepository);
 
-            _clientRepository.Delete(clientFromRepo);
+            bool responseFromRepository = _clientRepository.Delete(clientFromRepository);
+
+            _logger.LogInformation("DELETE: " + clientFromRepository.ToString());
+            return responseFromRepository ? new Result<ClientDTO>(200, clientDTO) : new Result<ClientDTO>(500);
         }
 
-        public void Edit(int id, ClientDTO clientDTO)
+        public Result<ClientDTO> Edit(int id, ClientDTO clientDTO)
         {
-            Client clientFromRepo = GetClientNullable(id);
+            Result<Client> result = GetClientNullable(id);
+            if (result.Data == null) { return new Result<ClientDTO>(404); }
 
-            EditFields(clientDTO, clientFromRepo);
+            Client clientFromRepository = result.Data;
 
-            _logger.LogInformation("UPDATE: " + clientFromRepo.ToString());
+            EditFields(clientDTO, clientFromRepository);
+            ClientDTO newClientDTO = _clientMapper.MapClientToClientDTO(clientFromRepository);
 
-            _clientRepository.Edit(clientFromRepo);
+            bool responseFromRepository = _clientRepository.Edit(clientFromRepository);
+
+            _logger.LogInformation("UPDATE: " + clientFromRepository.ToString());
+            return responseFromRepository ? new Result<ClientDTO>(200, newClientDTO) : new Result<ClientDTO>(500);
         }
 
         private Client EditFields(ClientDTO clientDTO, Client clientFromRepo)
@@ -57,29 +69,33 @@ namespace webAPI.Application.Services
             return clientFromRepo;
         }
 
-        public List<ClientDTO> GetAll()
+        public Result<List<ClientDTO>> GetAll()
         {
-            _logger.LogInformation("GET ALL");
-
-            return _clientMapper.
+            List<ClientDTO> list = _clientMapper.
                 MapClientListToClientDTOList(_clientRepository.FindAll().ToList());
+
+            _logger.LogInformation("GET ALL");
+            return new Result<List<ClientDTO>>(200, list);
         }
 
-        public ClientDTO GetById(int id)
+        public Result<ClientDTO> GetById(int id)
         {
-            Client clientFromRepo = GetClientNullable(id);
+            Result<Client> result = GetClientNullable(id);
+            if (result.Data == null) { return new Result<ClientDTO>(404); }
 
-            _logger.LogInformation("GET: " + clientFromRepo.ToString());
+            Client clientFromRepository = result.Data;
 
-            return _clientMapper.MapClientToClientDTO(clientFromRepo);
+            ClientDTO client = _clientMapper.MapClientToClientDTO(clientFromRepository);
+
+            _logger.LogInformation("GET: " + clientFromRepository.ToString());
+            return new Result<ClientDTO>(200, client);
         }
 
-        private Client GetClientNullable(int id)   
+        private Result<Client> GetClientNullable(int id)   
         {
-            Client? client = _clientRepository.FindById(id) ?? throw new HttpResponseException(HttpStatusCode.NotFound);
-            //TODO: Ver como atirar exçecões com http codes
+            Client? client = _clientRepository.FindById(id);
 
-            return client;
+            return client != null ? new Result<Client>(200, client) : new Result<Client>(404);
         }
     }
 }

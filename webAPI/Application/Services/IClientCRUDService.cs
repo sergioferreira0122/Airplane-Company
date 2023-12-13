@@ -1,13 +1,15 @@
-﻿using webAPI.Application.DTOs;
+﻿using MySqlX.XDevAPI.Common;
+using webAPI.Application.DTOs;
+using webAPI.Domain.Models;
 
 namespace webAPI.Application.Services
 {
     public interface IClientCRUDService
     {
-        List<ClientDTO> GetAll();
-        ClientDTO GetById(int id);
-        void Add(ClientDTO clientDTO);
-        void Edit(int id, ClientDTO clientDTO);
-        void Delete(int id);
+        Result<List<ClientDTO>> GetAll();
+        Result<ClientDTO> GetById(int id);
+        Result<ClientDTO> Add(ClientDTO clientDTO);
+        Result<ClientDTO> Edit(int id, ClientDTO clientDTO);
+        Result<ClientDTO> Delete(int id);
     }
 }
