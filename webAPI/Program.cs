@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿
 using System.Reflection;
 using webAPI.Application.Mappers;
 using webAPI.Application.Services;
@@ -16,12 +15,16 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
 
+//Connection
 builder.Services.AddTransient<ConnectionContext, ConnectionContext>();
 
+//Repositories
 builder.Services.AddTransient<IClientRepository, ClientRepository>();
 
+//Mappers
 builder.Services.AddTransient<IClientMapper, ClientMapper>();
 
+//Services
 builder.Services.AddTransient<IClientCRUDService, ClientService>();
 
 builder.Services.AddControllers();
