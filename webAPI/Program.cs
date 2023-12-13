@@ -4,7 +4,6 @@ using webAPI.Application.Mappers;
 using webAPI.Application.Services;
 using webAPI.Infrastructure;
 using webAPI.Infrastructure.Repositories;
-using webAPI.Infrastructure.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +18,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddTransient<ConnectionContext, ConnectionContext>();
 
 //Repositories
-builder.Services.AddTransient<IClientRepository, ClientRepository>();
+builder.Services.AddTransient<IRepository, ClientRepository>();
 
 //Mappers
 builder.Services.AddTransient<IClientMapper, ClientMapper>();

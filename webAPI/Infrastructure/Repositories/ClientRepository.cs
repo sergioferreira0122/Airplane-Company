@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using webAPI.Domain.Models;
-using webAPI.Infrastructure.Repositories.Interfaces;
 
 namespace webAPI.Infrastructure.Repositories
 {
-    public class ClientRepository : IClientRepository
+    public class ClientRepository : IRepository<Client>
     {
         private readonly ConnectionContext _connectionContext;
 
@@ -13,32 +12,32 @@ namespace webAPI.Infrastructure.Repositories
             _connectionContext = connectionContext;
         }
 
-        public IEnumerable<Client> getAll()
+        public IEnumerable<Client> FindAll()
         {
             return _connectionContext.Client.ToList();
         }
 
-        public Client? GetById(int id)
+        public Client? FindById(int id)
         {
             return _connectionContext.Client.Find(id);
         }
 
-        public void Add(Client client)
+        public bool Add(Client client)
         {
             _connectionContext.Client.Add(client);
-            _connectionContext.SaveChanges();
+            return _connectionContext.SaveChanges() > 0;
         }
 
-        public void Delete(Client client)
+        public bool Delete(Client client)
         {
             _connectionContext.Remove(client);
-            _connectionContext.SaveChanges();
+            return _connectionContext.SaveChanges() > 0;
         }
 
-        public void Edit(Client client)
+        public bool Edit(Client client)
         {
             _connectionContext.Client.Entry(client).State = EntityState.Modified;
-            _connectionContext.SaveChanges();
+            return _connectionContext.SaveChanges() > 0;
         }
     }
 }
