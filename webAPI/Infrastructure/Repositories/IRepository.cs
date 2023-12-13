@@ -2,9 +2,9 @@
 {
     public interface IRepository<T>
     {
-        IEnumerable<T> FindAll();
+        IEnumerable<T> GetAll();
 
-        T? FindById(int id);
+        T? GetById(int id);
 
         bool Add(T entity);
 

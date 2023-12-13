@@ -9,10 +9,8 @@ namespace webAPI.Domain.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
-        [Required, Range(1, 1_000_000)]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

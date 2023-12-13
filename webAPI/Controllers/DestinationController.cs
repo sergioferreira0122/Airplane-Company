@@ -21,14 +21,14 @@ namespace webAPI.Controllers
                 {
                     Id = 1,
                     Name = "Paris",
-                    Price = 200.00
+                    Price = 200.00m
                 });
 
                 destinationList.Add(new Destination
                 {
                     Id = 2,
                     Name = "Luxemburgo",
-                    Price = 250.00
+                    Price = 250.00m
                 });
             }
         }

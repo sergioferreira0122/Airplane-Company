@@ -21,7 +21,7 @@ namespace webAPI.Controllers
             {
                 Id = 1,
                 Name = "Paris",
-                Price = 200.00
+                Price = 200.00m
             });
 
             clientList.Add(new Client

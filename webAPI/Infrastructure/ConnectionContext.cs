@@ -7,6 +7,8 @@ namespace webAPI.Infrastructure
     {
         private readonly IConfiguration _configuration;
         public DbSet<Client> Client { get; set; }
+        public DbSet<Travel> Travel { get; set; }
+        public DbSet<Destination> Destination { get; set; }
 
         public ConnectionContext(IConfiguration configuration)
         {

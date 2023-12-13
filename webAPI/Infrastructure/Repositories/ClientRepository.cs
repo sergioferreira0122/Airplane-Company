@@ -12,12 +12,12 @@ namespace webAPI.Infrastructure.Repositories
             _connectionContext = connectionContext;
         }
 
-        public IEnumerable<Client> FindAll()
+        public IEnumerable<Client> GetAll()
         {
             return _connectionContext.Client.ToList();
         }
 
-        public Client? FindById(int id)
+        public Client? GetById(int id)
         {
             return _connectionContext.Client.Find(id);
         }

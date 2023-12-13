@@ -25,7 +25,7 @@ namespace webAPI.Application.Services
 
             bool responseFromRepository = _clientRepository.Add(client);
 
-            _logger.LogInformation("INSERT: " + client.ToString());
+            _logger.LogInformation("INSERT (Client): " + client.ToString());
             return responseFromRepository ? new Result<ClientDTO>(200, clientDTO) : new Result<ClientDTO>(500);
         }
 
@@ -39,7 +39,7 @@ namespace webAPI.Application.Services
 
             bool responseFromRepository = _clientRepository.Delete(clientFromRepository);
 
-            _logger.LogInformation("DELETE: " + clientFromRepository.ToString());
+            _logger.LogInformation("DELETE (Client): " + clientFromRepository.ToString());
             return responseFromRepository ? new Result<ClientDTO>(200, clientDTO) : new Result<ClientDTO>(500);
         }
 
@@ -55,7 +55,7 @@ namespace webAPI.Application.Services
 
             bool responseFromRepository = _clientRepository.Edit(clientFromRepository);
 
-            _logger.LogInformation("UPDATE: " + clientFromRepository.ToString());
+            _logger.LogInformation("UPDATE (Client): " + clientFromRepository.ToString());
             return responseFromRepository ? new Result<ClientDTO>(200, newClientDTO) : new Result<ClientDTO>(500);
         }
 
@@ -69,9 +69,9 @@ namespace webAPI.Application.Services
         public Result<List<ClientDTO>> GetAll()
         {
             List<ClientDTO> list = _clientMapper.
-                MapClientListToClientDTOList(_clientRepository.FindAll().ToList());
+                MapClientListToClientDTOList(_clientRepository.GetAll().ToList());
 
-            _logger.LogInformation("GET ALL");
+            _logger.LogInformation("GET ALL (Client)");
             return new Result<List<ClientDTO>>(200, list);
         }
 
@@ -84,13 +84,13 @@ namespace webAPI.Application.Services
 
             ClientDTO client = _clientMapper.MapClientToClientDTO(clientFromRepository);
 
-            _logger.LogInformation("GET: " + clientFromRepository.ToString());
+            _logger.LogInformation("GET (Client): " + clientFromRepository.ToString());
             return new Result<ClientDTO>(200, client);
         }
 
         private Result<Client> GetClientNullable(int id)
         {
-            Client? client = _clientRepository.FindById(id);
+            Client? client = _clientRepository.GetById(id);
 
             return client != null ? new Result<Client>(200, client) : new Result<Client>(404);
         }
