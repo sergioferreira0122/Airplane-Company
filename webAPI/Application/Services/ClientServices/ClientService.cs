@@ -1,5 +1,6 @@
 ﻿using webAPI.Application.DTOs;
 using webAPI.Application.Mappers;
+using webAPI.Application.Utils;
 using webAPI.Controllers;
 using webAPI.Domain.Models;
 using webAPI.Infrastructure.Repositories;

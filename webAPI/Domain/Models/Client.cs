@@ -11,9 +11,11 @@ namespace webAPI.Domain.Models
 
         public required string Name { get; set; }
 
+        public List<Travel>? Travels { get; set; }
+
         public override string ToString()
         {
-            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}}}";
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Travels)}={Travels}}}";
         }
     }
 }

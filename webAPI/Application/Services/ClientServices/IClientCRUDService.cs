@@ -1,5 +1,5 @@
 ﻿using webAPI.Application.DTOs;
-using webAPI.Domain.Models;
+using webAPI.Application.Utils;
 
 namespace webAPI.Application.Services.ClientServices
 {

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webAPI.Infrastructure;
 
@@ -10,9 +11,11 @@ using webAPI.Infrastructure;
 namespace webAPI.Migrations
 {
     [DbContext(typeof(ConnectionContext))]
-    partial class ConnectionContextModelSnapshot : ModelSnapshot
+    [Migration("20231213162833_add one to many destination to travel")]
+    partial class addonetomanydestinationtotravel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,12 +110,17 @@ namespace webAPI.Migrations
             modelBuilder.Entity("webAPI.Domain.Models.Travel", b =>
                 {
                     b.HasOne("webAPI.Domain.Models.Destination", "Destination")
-                        .WithMany()
+                        .WithMany("Travels")
                         .HasForeignKey("DestinationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Destination");
+                });
+
+            modelBuilder.Entity("webAPI.Domain.Models.Destination", b =>
+                {
+                    b.Navigation("Travels");
                 });
 #pragma warning restore 612, 618
         }

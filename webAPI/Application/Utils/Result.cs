@@ -1,4 +1,4 @@
-﻿namespace webAPI.Domain.Models
+﻿namespace webAPI.Application.Utils
 {
     public class Result<T>
     {

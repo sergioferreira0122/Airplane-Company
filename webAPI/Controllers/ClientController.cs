@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using webAPI.Application.DTOs;
 using webAPI.Application.Services.ClientServices;
-using webAPI.Domain.Models;
+using webAPI.Application.Utils;
 
 namespace webAPI.Controllers
 {
