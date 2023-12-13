@@ -3,13 +3,13 @@ using webAPI.Domain.Models;
 
 namespace webAPI.Application.Mappers
 {
-    public class ClientMapper : IClientMapper
+    public class ClientMapper
     {
         public Client MapClientDTOToClient(ClientDTO clientDTO)
         {
             Client client = new Client
             {
-                Name = clientDTO.Name
+                Name = clientDTO.Name,
             };
 
             return client;
@@ -19,7 +19,7 @@ namespace webAPI.Application.Mappers
         {
             ClientDTO clientDTO = new ClientDTO
             {
-                Name = client.Name
+                Name = client.Name,
             };
 
             return clientDTO;

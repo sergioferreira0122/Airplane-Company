@@ -12,5 +12,10 @@ namespace webAPI.Domain.Models
         public required string Name { get; set; }
 
         public decimal Price { get; set; }
+
+        public override string ToString()
+        {
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Price)}={Price.ToString()}}}";
+        }
     }
 }

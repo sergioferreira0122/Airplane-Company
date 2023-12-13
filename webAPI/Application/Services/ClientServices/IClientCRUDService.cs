@@ -1,7 +1,7 @@
 ﻿using webAPI.Application.DTOs;
 using webAPI.Domain.Models;
 
-namespace webAPI.Application.Services
+namespace webAPI.Application.Services.ClientServices
 {
     public interface IClientCRUDService
     {

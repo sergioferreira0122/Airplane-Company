@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using webAPI.Application.Mappers;
-using webAPI.Application.Services;
+using webAPI.Application.Services.ClientServices;
+using webAPI.Application.Services.DestinationServices;
 using webAPI.Domain.Models;
 using webAPI.Infrastructure;
 using webAPI.Infrastructure.Repositories;
@@ -16,15 +17,22 @@ builder.Services.AddSwaggerGen(c =>
 
 //Connection
 builder.Services.AddTransient<ConnectionContext, ConnectionContext>();
+//Connection
 
 //Repositories
 builder.Services.AddTransient<IRepository<Client>, ClientRepository>();
+builder.Services.AddTransient<IRepository<Destination>, DestinationRepository>();
+//Repositories
 
 //Mappers
-builder.Services.AddTransient<IClientMapper, ClientMapper>();
+builder.Services.AddTransient<ClientMapper, ClientMapper>();
+builder.Services.AddTransient<DestinationMapper, DestinationMapper>();
+//Mappers
 
 //Services
 builder.Services.AddTransient<IClientCRUDService, ClientService>();
+builder.Services.AddTransient<IDestinationCRUDService, DestinationService>();
+//Services
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

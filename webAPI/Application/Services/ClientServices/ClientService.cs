@@ -4,15 +4,15 @@ using webAPI.Controllers;
 using webAPI.Domain.Models;
 using webAPI.Infrastructure.Repositories;
 
-namespace webAPI.Application.Services
+namespace webAPI.Application.Services.ClientServices
 {
     public class ClientService : IClientCRUDService
     {
-        private readonly ILogger<ClientController> _logger;
+        private readonly ILogger<ClientService> _logger;
         private readonly IRepository<Client> _clientRepository;
-        private readonly IClientMapper _clientMapper;
+        private readonly ClientMapper _clientMapper;
 
-        public ClientService(ILogger<ClientController> logger, IRepository<Client> clientRepository, IClientMapper clientMapper)
+        public ClientService(ILogger<ClientService> logger, IRepository<Client> clientRepository, ClientMapper clientMapper)
         {
             _logger = logger;
             _clientRepository = clientRepository;
@@ -68,11 +68,11 @@ namespace webAPI.Application.Services
 
         public Result<List<ClientDTO>> GetAll()
         {
-            List<ClientDTO> list = _clientMapper.
+            List<ClientDTO> listDTOs = _clientMapper.
                 MapClientListToClientDTOList(_clientRepository.GetAll().ToList());
 
             _logger.LogInformation("GET ALL (Client)");
-            return new Result<List<ClientDTO>>(200, list);
+            return new Result<List<ClientDTO>>(200, listDTOs);
         }
 
         public Result<ClientDTO> GetById(int id)
@@ -82,10 +82,10 @@ namespace webAPI.Application.Services
 
             Client clientFromRepository = result.Data;
 
-            ClientDTO client = _clientMapper.MapClientToClientDTO(clientFromRepository);
+            ClientDTO clientDTO = _clientMapper.MapClientToClientDTO(clientFromRepository);
 
             _logger.LogInformation("GET (Client): " + clientFromRepository.ToString());
-            return new Result<ClientDTO>(200, client);
+            return new Result<ClientDTO>(200, clientDTO);
         }
 
         private Result<Client> GetClientNullable(int id)

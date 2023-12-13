@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using webAPI.Application.DTOs;
+using webAPI.Application.Services.DestinationServices;
 using webAPI.Domain.Models;
 
 namespace webAPI.Controllers
@@ -7,81 +9,46 @@ namespace webAPI.Controllers
     [Route("api/[controller]")]
     public class DestinationController : ControllerBase
     {
-        private static List<Destination> destinationList = new List<Destination>();
+        private readonly IDestinationCRUDService _destinationCRUDService;
 
-        private readonly ILogger<DestinationController> _logger;
-
-        public DestinationController(ILogger<DestinationController> logger)
+        public DestinationController(IDestinationCRUDService destinationCRUDService)
         {
-            _logger = logger;
-
-            if (destinationList.Count == 0)
-            {
-                destinationList.Add(new Destination
-                {
-                    Id = 1,
-                    Name = "Paris",
-                    Price = 200.00m
-                });
-
-                destinationList.Add(new Destination
-                {
-                    Id = 2,
-                    Name = "Luxemburgo",
-                    Price = 250.00m
-                });
-            }
+            _destinationCRUDService = destinationCRUDService;
         }
 
         [HttpGet()]
         public IActionResult Get()
         {
-            return Ok(destinationList);
+            Result<List<DestinationDTO>> result = _destinationCRUDService.GetAll();
+            return StatusCode(result.HttpCode, result.Data);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            Destination? destination = destinationList.Find(destination => destination.Id == id);
-
-            if (destination == null) { return NotFound(); }
-
-            return Ok(destination);
+            Result<DestinationDTO> result = _destinationCRUDService.GetById(id);
+            return StatusCode(result.HttpCode, result.Data);
         }
 
         [HttpPost()]
-        public IActionResult Post(Destination newDestination)
+        public IActionResult Post(DestinationDTO newDestinationDTO)
         {
-            destinationList.Add(newDestination);
-            return Ok();
+            Result<DestinationDTO> result = _destinationCRUDService.Add(newDestinationDTO);
+            return StatusCode(result.HttpCode, result.Data);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Destination? destination = destinationList.Find(destination => destination.Id == id);
-
-            if (destination == null) { return NotFound(); }
-
-            destinationList.Remove(destination);
-
-            return Ok();
+            Result<DestinationDTO> result = _destinationCRUDService.Delete(id);
+            return StatusCode(result.HttpCode, result.Data);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Destination updatedDestination)
+        public IActionResult Put(int id, [FromBody] DestinationDTO updatedDestinationDTO)
         {
-            Destination? existingDestination = destinationList.Find(destination => destination.Id == id);
-
-            if (existingDestination == null)
-            {
-                return NotFound();
-            }
-
-            existingDestination.Name = updatedDestination.Name;
-            existingDestination.Price = updatedDestination.Price;
-
-            return Ok(existingDestination);
+            Result<DestinationDTO> result = _destinationCRUDService.Edit(id, updatedDestinationDTO);
+            return StatusCode(result.HttpCode, result.Data);
         }
     }
 }

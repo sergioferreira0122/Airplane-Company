@@ -12,6 +12,24 @@ namespace webAPI.Infrastructure.Repositories
             _connectionContext = connectionContext;
         }
 
+        public bool Add(Client entity)
+        {
+            _connectionContext.Client.Add(entity);
+            return _connectionContext.SaveChanges() > 0;
+        }
+
+        public bool Delete(Client entity)
+        {
+            _connectionContext.Client.Remove(entity);
+            return _connectionContext.SaveChanges() > 0;
+        }
+
+        public bool Edit(Client entity)
+        {
+            _connectionContext.Client.Entry(entity).State = EntityState.Modified;
+            return _connectionContext.SaveChanges() > 0;
+        }
+
         public IEnumerable<Client> GetAll()
         {
             return _connectionContext.Client.ToList();
@@ -20,24 +38,6 @@ namespace webAPI.Infrastructure.Repositories
         public Client? GetById(int id)
         {
             return _connectionContext.Client.Find(id);
-        }
-
-        public bool Add(Client client)
-        {
-            _connectionContext.Client.Add(client);
-            return _connectionContext.SaveChanges() > 0;
-        }
-
-        public bool Delete(Client client)
-        {
-            _connectionContext.Remove(client);
-            return _connectionContext.SaveChanges() > 0;
-        }
-
-        public bool Edit(Client client)
-        {
-            _connectionContext.Client.Entry(client).State = EntityState.Modified;
-            return _connectionContext.SaveChanges() > 0;
         }
     }
 }

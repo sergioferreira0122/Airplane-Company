@@ -16,5 +16,10 @@ namespace webAPI.Domain.Models
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public override string ToString()
+        {
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Destination)}={Destination}, {nameof(Client)}={Client}, {nameof(StartDate)}={StartDate.ToString()}, {nameof(EndDate)}={EndDate.ToString()}}}";
+        }
     }
 }

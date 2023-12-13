@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using webAPI.Application.DTOs;
-using webAPI.Application.Services;
+using webAPI.Application.Services.ClientServices;
 using webAPI.Domain.Models;
 
 namespace webAPI.Controllers
