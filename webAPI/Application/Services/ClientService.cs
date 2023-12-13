@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using System.Net;
-using System.Web.Http;
-using webAPI.Application.DTOs;
+﻿using webAPI.Application.DTOs;
 using webAPI.Application.Mappers;
 using webAPI.Controllers;
 using webAPI.Domain.Models;
@@ -15,7 +12,7 @@ namespace webAPI.Application.Services
         private readonly IRepository<Client> _clientRepository;
         private readonly IClientMapper _clientMapper;
 
-        public ClientService(ILogger<ClientController> logger , IRepository<Client> clientRepository, IClientMapper clientMapper)
+        public ClientService(ILogger<ClientController> logger, IRepository<Client> clientRepository, IClientMapper clientMapper)
         {
             _logger = logger;
             _clientRepository = clientRepository;
@@ -91,7 +88,7 @@ namespace webAPI.Application.Services
             return new Result<ClientDTO>(200, client);
         }
 
-        private Result<Client> GetClientNullable(int id)   
+        private Result<Client> GetClientNullable(int id)
         {
             Client? client = _clientRepository.FindById(id);
 

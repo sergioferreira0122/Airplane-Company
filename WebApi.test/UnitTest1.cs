@@ -1,13 +1,8 @@
-using webAPI.Application.Services;
-using webAPI.Models;
-
-
 namespace WebApi.test
 {
     public class UnitTest1
     {
-
-        Calculos calculos = new Calculos();
+        private Calculos calculos = new Calculos();
 
         [Fact]
         public void CalcularDuracaoViagemTest()
@@ -18,9 +13,7 @@ namespace WebApi.test
 
             int dias = calculos.CalcularDuracaoViagem(dataPartida, dataChegada);
 
-
             Assert.Equal(expectavel, dias);
-
         }
 
         [Fact]

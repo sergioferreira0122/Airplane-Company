@@ -1,10 +1,9 @@
-﻿using System.Xml.Linq;
-using webAPI.Application.DTOs;
+﻿using webAPI.Application.DTOs;
 using webAPI.Domain.Models;
 
 namespace webAPI.Application.Mappers
 {
-    public class ClientMapper : IClientMapper 
+    public class ClientMapper : IClientMapper
     {
         public Client MapClientDTOToClient(ClientDTO clientDTO)
         {

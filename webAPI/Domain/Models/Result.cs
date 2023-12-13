@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace webAPI.Domain.Models
+﻿namespace webAPI.Domain.Models
 {
     public class Result<T>
     {

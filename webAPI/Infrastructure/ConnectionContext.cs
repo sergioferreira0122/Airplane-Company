@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 using webAPI.Domain.Models;
 
 namespace webAPI.Infrastructure

@@ -3,13 +3,10 @@ using webAPI.Domain.Models;
 
 namespace webAPI.Controllers
 {
-
-
     [ApiController]
     [Route("api/[controller]")]
     public class TravelController : ControllerBase
     {
-
         private static List<Travel> travelList = new List<Travel>();
         private static List<Destination> destinationList = new List<Destination>();
         private static List<Client> clientList = new List<Client>();
@@ -47,7 +44,6 @@ namespace webAPI.Controllers
 
             if (travelList.Count == 0)
             {
-
                 travelList.Add(new Travel
                 {
                     Id = 1,

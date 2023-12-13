@@ -7,7 +7,6 @@ namespace webAPI.Controllers
     [Route("api/[controller]")]
     public class DestinationController : ControllerBase
     {
-
         private static List<Destination> destinationList = new List<Destination>();
 
         private readonly ILogger<DestinationController> _logger;
@@ -30,8 +29,7 @@ namespace webAPI.Controllers
                     Id = 2,
                     Name = "Luxemburgo",
                     Price = 250.00
-                }); 
-
+                });
             }
         }
 
@@ -44,18 +42,18 @@ namespace webAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-           Destination? destination = destinationList.Find(destination => destination.Id == id);
+            Destination? destination = destinationList.Find(destination => destination.Id == id);
 
-           if (destination == null) { return NotFound(); }
+            if (destination == null) { return NotFound(); }
 
-           return Ok(destination);
+            return Ok(destination);
         }
 
         [HttpPost()]
         public IActionResult Post(Destination newDestination)
         {
-           destinationList.Add(newDestination);
-           return Ok();
+            destinationList.Add(newDestination);
+            return Ok();
         }
 
         [HttpDelete("{id}")]

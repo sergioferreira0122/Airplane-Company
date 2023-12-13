@@ -1,5 +1,4 @@
-﻿
-using System.Reflection;
+﻿using System.Reflection;
 using webAPI.Application.Mappers;
 using webAPI.Application.Services;
 using webAPI.Domain.Models;
@@ -48,4 +47,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
