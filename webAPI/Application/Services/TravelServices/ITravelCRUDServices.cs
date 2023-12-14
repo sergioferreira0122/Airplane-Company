@@ -12,7 +12,7 @@ namespace webAPI.Application.Services.TravelServices
 
         Travel Add(Travel travel);
 
-        Travel Edit(Travel travel, TravelWriteModel travelWriteModel);
+        Travel Edit(Travel travel, TravelWriteModel travelWriteModel, Destination destination);
 
         void Delete(Travel travel);
     }

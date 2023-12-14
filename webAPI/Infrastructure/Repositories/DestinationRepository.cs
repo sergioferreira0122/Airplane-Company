@@ -38,7 +38,7 @@ namespace webAPI.Infrastructure.Repositories
 
         public Destination? GetById(int id)
         {
-            return _connectionContext.Destination.Find(id);
+            return _connectionContext.Destination.FirstOrDefault(x => x.Id == id);
         }
     }
 }

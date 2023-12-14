@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using webAPI.Application.Mappers;
-using webAPI.Application.Models.ViewModels;
 using webAPI.Application.Models.WriteModels;
-using webAPI.Application.Services.ClientServices;
 using webAPI.Application.Services.DestinationServices;
 using webAPI.Domain.Models;
 

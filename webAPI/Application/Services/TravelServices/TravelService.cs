@@ -1,6 +1,4 @@
-﻿using webAPI.Application.Mappers;
-using webAPI.Application.Models.ViewModels;
-using webAPI.Application.Models.WriteModels;
+﻿using webAPI.Application.Models.WriteModels;
 using webAPI.Domain.Models;
 using webAPI.Infrastructure.Repositories;
 
@@ -9,37 +7,52 @@ namespace webAPI.Application.Services.TravelServices
     public class TravelService : ITravelCRUDServices
     {
         private readonly IRepository<Travel> _travelRepository;
-        private readonly IRepository<Destination> _destinationRepository;
 
-        public TravelService(IRepository<Travel> travelRepository,IRepository<Destination> destinationRepository)
+        public TravelService(IRepository<Travel> travelRepository)
         {
             _travelRepository = travelRepository;
-            _destinationRepository = destinationRepository;
         }
 
         public Travel Add(Travel travel)
         {
-            throw new NotImplementedException();
+            _travelRepository.Add(travel);
+
+            return travel;
         }
 
         public void Delete(Travel travel)
         {
-            throw new NotImplementedException();
+            _travelRepository.Delete(travel);
         }
 
-        public Travel Edit(Travel travel, TravelWriteModel travelWriteModel)
+        public Travel Edit(Travel travel, TravelWriteModel travelWriteModel, Destination destination)
         {
-            throw new NotImplementedException();
+            EditFields(travelWriteModel, travel, destination);
+
+            _travelRepository.Edit(travel);
+
+            return travel;
+        }
+
+        private static Travel EditFields(TravelWriteModel travelWriteModel, Travel travel, Destination destination)
+        {
+            travel.Destination = destination;
+            travel.StartDate = travelWriteModel.StartDate;
+            travel.EndDate = travelWriteModel.EndDate;
+
+            return travel;
         }
 
         public List<Travel> GetAll()
         {
-            throw new NotImplementedException();
+            return _travelRepository.GetAll().ToList();
         }
 
         public Travel? GetById(int id)
         {
-            throw new NotImplementedException();
+            Travel? travelFromRepository = _travelRepository.GetById(id);
+
+            return travelFromRepository?? null;
         }
     }
 }

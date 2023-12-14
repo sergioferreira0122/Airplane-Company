@@ -32,12 +32,16 @@ namespace webAPI.Infrastructure.Repositories
 
         public IEnumerable<Travel> GetAll()
         {
-            return _connectionContext.Travel.ToList();
+            return _connectionContext.Travel
+                .Include("Destination")
+                .ToList();
         }
 
         public Travel? GetById(int id)
         {
-            return _connectionContext.Travel.Find(id);
+            return _connectionContext.Travel
+                .Include("Destination")
+                .FirstOrDefault(x => x.Id == id);
         }
     }
 }

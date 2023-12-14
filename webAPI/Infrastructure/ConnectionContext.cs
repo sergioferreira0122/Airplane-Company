@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using webAPI.Domain.Models;
 
 namespace webAPI.Infrastructure
@@ -19,5 +20,7 @@ namespace webAPI.Infrastructure
         {
             optionsBuilder.UseMySQL(_configuration.GetConnectionString("Database"));
         }
+
+        
     }
 }
