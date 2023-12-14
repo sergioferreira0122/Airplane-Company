@@ -6,10 +6,10 @@
 
         T? GetById(int id);
 
-        bool Add(T entity);
+        void Add(T entity);
 
-        bool Edit(T entity);
+        void Edit(T entity);
 
-        bool Delete(T entity);
+        void Delete(T entity);
     }
 }

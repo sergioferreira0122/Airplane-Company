@@ -1,18 +1,19 @@
-﻿using webAPI.Application.DTOs;
-using webAPI.Application.Utils;
+﻿using webAPI.Application.Models.ViewModels;
+using webAPI.Application.Models.WriteModels;
+using webAPI.Domain.Models;
 
 namespace webAPI.Application.Services.DestinationServices
 {
     public interface IDestinationCRUDService
     {
-        Result<List<DestinationDTO>> GetAll();
+        List<Destination> GetAll();
 
-        Result<DestinationDTO> GetById(int id);
+        Destination? GetById(int id);
 
-        Result<DestinationDTO> Add(DestinationDTO destinationDTO);
+        Destination Add(Destination destination);
 
-        Result<DestinationDTO> Edit(int id, DestinationDTO destinationDTO);
+        Destination Edit(Destination destination, DestinationWriteModel destinationWriteModel);
 
-        Result<DestinationDTO> Delete(int id);
+        void Delete(Destination destination);
     }
 }

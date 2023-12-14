@@ -15,7 +15,7 @@ namespace webAPI.Domain.Models
 
         public override string ToString()
         {
-            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Travels)}={Travels}}}";
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}}}";
         }
     }
 }

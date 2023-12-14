@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using webAPI.Application.DTOs;
+using webAPI.Application.Mappers;
+using webAPI.Application.Models.ViewModels;
+using webAPI.Application.Models.WriteModels;
+using webAPI.Application.Services.ClientServices;
 using webAPI.Application.Services.DestinationServices;
-using webAPI.Application.Utils;
+using webAPI.Domain.Models;
 
 namespace webAPI.Controllers
 {
@@ -9,46 +12,68 @@ namespace webAPI.Controllers
     [Route("api/[controller]")]
     public class DestinationController : ControllerBase
     {
+        private readonly ILogger<DestinationController> _logger;
         private readonly IDestinationCRUDService _destinationCRUDService;
+        private readonly DestinationMapper _destinationMapper;
 
-        public DestinationController(IDestinationCRUDService destinationCRUDService)
+        public DestinationController(ILogger<DestinationController> logger, IDestinationCRUDService destinationCRUDService, DestinationMapper destinationMapper)
         {
+            _logger = logger;
             _destinationCRUDService = destinationCRUDService;
+            _destinationMapper = destinationMapper;
         }
 
         [HttpGet()]
         public IActionResult Get()
         {
-            Result<List<DestinationDTO>> result = _destinationCRUDService.GetAll();
-            return StatusCode(result.HttpCode, result.Data);
+            List<Destination> destinations = _destinationCRUDService.GetAll();
+            if (destinations.Count == 0) { return NoContent(); }
+
+            _logger.LogInformation("GET ALL (Destination)");
+            return Ok(_destinationMapper.MapModelListToViewModelList(destinations));
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            Result<DestinationDTO> result = _destinationCRUDService.GetById(id);
-            return StatusCode(result.HttpCode, result.Data);
-        }
+            Destination? destination = _destinationCRUDService.GetById(id);
+            if (destination == null) { return NotFound("Destination not found."); }
 
-        [HttpPost()]
-        public IActionResult Post(DestinationDTO newDestinationDTO)
-        {
-            Result<DestinationDTO> result = _destinationCRUDService.Add(newDestinationDTO);
-            return StatusCode(result.HttpCode, result.Data);
+            _logger.LogInformation("GET (Destination): " + destination.ToString());
+            return Ok(_destinationMapper.MapModelToViewModel(destination));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Result<DestinationDTO> result = _destinationCRUDService.Delete(id);
-            return StatusCode(result.HttpCode, result.Data);
+            Destination? destination = _destinationCRUDService.GetById(id);
+            if (destination == null) { return NotFound("Destination not found."); }
+
+            _destinationCRUDService.Delete(destination);
+
+            _logger.LogInformation("GET (Destination): " + destination.ToString());
+            return Ok("Destination deleted.");
+        }
+
+        [HttpPost()]
+        public IActionResult Post(DestinationWriteModel destinationWriteModel)
+        {
+            Destination destination = _destinationCRUDService.Add(_destinationMapper.MapWriteModelToModel(destinationWriteModel));
+
+            _logger.LogInformation("GET (Destination): " + destination.ToString());
+            return Ok(_destinationMapper.MapModelToViewModel(destination));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] DestinationDTO updatedDestinationDTO)
+        public IActionResult Put(int id, [FromBody] DestinationWriteModel updatedDestinationWriteModel)
         {
-            Result<DestinationDTO> result = _destinationCRUDService.Edit(id, updatedDestinationDTO);
-            return StatusCode(result.HttpCode, result.Data);
+            Destination? destination = _destinationCRUDService.GetById(id);
+            if (destination == null) { return NotFound("Destination not found."); }
+
+            Destination destinationUpdated = _destinationCRUDService.Edit(destination, updatedDestinationWriteModel);
+
+            _logger.LogInformation("UPDATE (Destination): " + destinationUpdated.ToString());
+            return Ok(_destinationMapper.MapModelToViewModel(destination));
         }
     }
 }

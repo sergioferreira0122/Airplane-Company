@@ -1,18 +1,19 @@
-﻿using webAPI.Application.DTOs;
-using webAPI.Application.Utils;
+﻿using webAPI.Application.Models.ViewModels;
+using webAPI.Application.Models.WriteModels;
+using webAPI.Domain.Models;
 
 namespace webAPI.Application.Services.ClientServices
 {
     public interface IClientCRUDService
     {
-        Result<List<ClientDTO>> GetAll();
+        List<Client> GetAll();
 
-        Result<ClientDTO> GetById(int id);
+        Client? GetById(int id);
 
-        Result<ClientDTO> Add(ClientDTO clientDTO);
+        Client Add(Client client);
 
-        Result<ClientDTO> Edit(int id, ClientDTO clientDTO);
+        Client Edit(Client client, ClientWriteModel clientWriteModel);
 
-        Result<ClientDTO> Delete(int id);
+        void Delete(Client client);
     }
 }

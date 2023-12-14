@@ -1,39 +1,41 @@
-﻿using webAPI.Application.DTOs;
+﻿using webAPI.Application.Models.ViewModels;
+using webAPI.Application.Models.WriteModels;
 using webAPI.Domain.Models;
 
 namespace webAPI.Application.Mappers
 {
     public class DestinationMapper
     {
-        public Destination MapDestinationDTOToDestination(DestinationDTO destinationDTO)
+        public Destination MapWriteModelToModel(DestinationWriteModel destinationWriteModel)
         {
             Destination destination = new Destination
             {
-                Name = destinationDTO.Name,
-                Price = destinationDTO.Price,
+                Name = destinationWriteModel.Name,
+                Price = destinationWriteModel.Price,
             };
 
             return destination;
         }
 
-        public DestinationDTO MapDestinationToDestinationDTO(Destination destination)
+        public DestinationViewModel MapModelToViewModel(Destination destination)
         {
-            DestinationDTO clientDTO = new DestinationDTO
+            DestinationViewModel destinationViewModel = new DestinationViewModel
             {
+                Id = destination.Id,
                 Name = destination.Name,
                 Price = destination.Price,
             };
 
-            return clientDTO;
+            return destinationViewModel;
         }
 
-        public List<DestinationDTO> MapDestinationListToDestinationDTOList(List<Destination> destinations)
+        public List<DestinationViewModel> MapModelListToViewModelList(List<Destination> destinations)
         {
-            List<DestinationDTO> list = new List<DestinationDTO>();
+            List<DestinationViewModel> list = new List<DestinationViewModel>();
 
             foreach (Destination destination in destinations)
             {
-                list.Add(MapDestinationToDestinationDTO(destination));
+                list.Add(MapModelToViewModel(destination));
             }
 
             return list;

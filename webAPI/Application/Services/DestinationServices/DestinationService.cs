@@ -1,7 +1,4 @@
-﻿using webAPI.Application.DTOs;
-using webAPI.Application.Mappers;
-using webAPI.Application.Utils;
-using webAPI.Controllers;
+﻿using webAPI.Application.Models.WriteModels;
 using webAPI.Domain.Models;
 using webAPI.Infrastructure.Repositories;
 
@@ -9,92 +6,52 @@ namespace webAPI.Application.Services.DestinationServices
 {
     public class DestinationService : IDestinationCRUDService
     {
-        private readonly ILogger<DestinationService> _logger;
         private readonly IRepository<Destination> _destinationRepository;
-        private readonly DestinationMapper _destinationMapper;
 
-        public DestinationService(ILogger<DestinationService> logger, IRepository<Destination> destinationRepository, DestinationMapper destinationMapper)
+        public DestinationService(IRepository<Destination> destinationRepository)
         {
-            _logger = logger;
             _destinationRepository = destinationRepository;
-            _destinationMapper = destinationMapper;
         }
 
-        public Result<DestinationDTO> Add(DestinationDTO destinationDTO)
+        public Destination Add(Destination destination)
         {
-            Destination destination = _destinationMapper.MapDestinationDTOToDestination(destinationDTO);
+            _destinationRepository.Add(destination);
 
-            bool responseFromRepository = _destinationRepository.Add(destination);
-
-            _logger.LogInformation("INSERT (Destination): " + destination.ToString());
-            return responseFromRepository ? new Result<DestinationDTO>(200, destinationDTO) : new Result<DestinationDTO>(500);
+            return destination;
         }
 
-        public Result<DestinationDTO> Delete(int id)
+        public void Delete(Destination destination)
         {
-            Result<Destination> result = GetDestinationNullable(id);
-            if (result.Data == null) { return new Result<DestinationDTO>(404); }
-
-            Destination destinationFromRepository = result.Data;
-            DestinationDTO destinationDTO = _destinationMapper.MapDestinationToDestinationDTO(destinationFromRepository);
-
-            bool responseFromRepository = _destinationRepository.Delete(destinationFromRepository);
-
-            _logger.LogInformation("DELETE (Destination): " + destinationFromRepository.ToString());
-            return responseFromRepository ? new Result<DestinationDTO>(200, destinationDTO) : new Result<DestinationDTO>(500);
+            _destinationRepository.Delete(destination);
         }
 
-        public Result<DestinationDTO> Edit(int id, DestinationDTO destinationDTO)
+        public Destination Edit(Destination destination, DestinationWriteModel destinationWriteModel)
         {
-            Result<Destination> result = GetDestinationNullable(id);
-            if (result.Data == null) { return new Result<DestinationDTO>(404); }
+            EditFields(destinationWriteModel, destination);
 
-            Destination destinationFromRepository = result.Data;
+            _destinationRepository.Edit(destination);
 
-            EditFields(destinationDTO, destinationFromRepository);
-            DestinationDTO newDestinationDTO = _destinationMapper.MapDestinationToDestinationDTO(destinationFromRepository);
-
-            bool responseFromRepository = _destinationRepository.Edit(destinationFromRepository);
-
-            _logger.LogInformation("UPDATE (Destination): " + destinationFromRepository.ToString());
-            return responseFromRepository ? new Result<DestinationDTO>(200, newDestinationDTO) : new Result<DestinationDTO>(500);
+            return destination;
         }
 
-        private Destination EditFields(DestinationDTO destinationDTO, Destination destinationFromRepo)
+        private static Destination EditFields(DestinationWriteModel destinationWriteModel, Destination destination)
         {
-            destinationFromRepo.Name = destinationDTO.Name;
-            destinationFromRepo.Price = destinationDTO.Price;
+            destination.Price = destinationWriteModel.Price;
+            destination.Name = destinationWriteModel.Name;
 
-            return destinationFromRepo;
+            return destination;
         }
 
-        public Result<List<DestinationDTO>> GetAll()
+        public List<Destination> GetAll()
         {
-            List<DestinationDTO> listDTOs = _destinationMapper.
-                MapDestinationListToDestinationDTOList(_destinationRepository.GetAll().ToList());
-
-            _logger.LogInformation("GET ALL (Destination)");
-            return new Result<List<DestinationDTO>>(200, listDTOs);
+            return _destinationRepository.GetAll().ToList();
         }
 
-        public Result<DestinationDTO> GetById(int id)
+        public Destination? GetById(int id)
         {
-            Result<Destination> result = GetDestinationNullable(id);
-            if (result.Data == null) { return new Result<DestinationDTO>(404); }
+            Destination? destinationFromRepository = _destinationRepository.GetById(id);
 
-            Destination destinationFromRepository = result.Data;
-
-            DestinationDTO destinationDTO = _destinationMapper.MapDestinationToDestinationDTO(destinationFromRepository);
-
-            _logger.LogInformation("GET (Client): " + destinationFromRepository.ToString());
-            return new Result<DestinationDTO>(200, destinationDTO);
-        }
-
-        private Result<Destination> GetDestinationNullable(int id)
-        {
-            Destination? destination = _destinationRepository.GetById(id);
-
-            return destination != null ? new Result<Destination>(200, destination) : new Result<Destination>(404);
+            return destinationFromRepository ?? null;
         }
     }
 }

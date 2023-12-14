@@ -1,37 +1,39 @@
-﻿using webAPI.Application.DTOs;
+﻿using webAPI.Application.Models.ViewModels;
+using webAPI.Application.Models.WriteModels;
 using webAPI.Domain.Models;
 
 namespace webAPI.Application.Mappers
 {
     public class ClientMapper
     {
-        public Client MapClientDTOToClient(ClientDTO clientDTO)
+        public Client MapWriteModelToModel(ClientWriteModel clientWriteModel)
         {
             Client client = new Client
             {
-                Name = clientDTO.Name,
+                Name = clientWriteModel.Name,
             };
 
             return client;
         }
 
-        public ClientDTO MapClientToClientDTO(Client client)
+        public ClientViewModel MapModelToViewModel(Client client)
         {
-            ClientDTO clientDTO = new ClientDTO
+            ClientViewModel clientViewModel = new ClientViewModel
             {
+                Id = client.Id,
                 Name = client.Name,
             };
 
-            return clientDTO;
+            return clientViewModel;
         }
 
-        public List<ClientDTO> MapClientListToClientDTOList(List<Client> clients)
+        public List<ClientViewModel> MapModelListToViewModelList(List<Client> clients)
         {
-            List<ClientDTO> list = new List<ClientDTO>();
+            List<ClientViewModel> list = new List<ClientViewModel>();
 
             foreach (Client client in clients)
             {
-                list.Add(MapClientToClientDTO(client));
+                list.Add(MapModelToViewModel(client));
             }
 
             return list;

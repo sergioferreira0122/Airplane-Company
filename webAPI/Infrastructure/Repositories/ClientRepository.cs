@@ -12,22 +12,22 @@ namespace webAPI.Infrastructure.Repositories
             _connectionContext = connectionContext;
         }
 
-        public bool Add(Client entity)
+        public void Add(Client entity)
         {
             _connectionContext.Client.Add(entity);
-            return _connectionContext.SaveChanges() > 0;
+            _connectionContext.SaveChanges();
         }
 
-        public bool Delete(Client entity)
+        public void Delete(Client entity)
         {
             _connectionContext.Client.Remove(entity);
-            return _connectionContext.SaveChanges() > 0;
+            _connectionContext.SaveChanges();
         }
 
-        public bool Edit(Client entity)
+        public void Edit(Client entity)
         {
             _connectionContext.Client.Entry(entity).State = EntityState.Modified;
-            return _connectionContext.SaveChanges() > 0;
+            _connectionContext.SaveChanges();
         }
 
         public IEnumerable<Client> GetAll()

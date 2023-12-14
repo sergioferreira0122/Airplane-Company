@@ -19,7 +19,7 @@ namespace webAPI.Domain.Models
 
         public override string ToString()
         {
-            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Destination)}={Destination}, {nameof(Client)}={Client}, {nameof(StartDate)}={StartDate.ToString()}, {nameof(EndDate)}={EndDate.ToString()}}}";
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Destination)}={Destination}, {nameof(StartDate)}={StartDate.ToString()}, {nameof(EndDate)}={EndDate.ToString()}}}";
         }
     }
 }
