@@ -62,7 +62,7 @@ namespace webAPI.Controllers
             Destination? destination= _destinationCRUDService.GetById(newTravelWriteModel.DestinationId);
             if (destination == null) { return BadRequest("Destination not found."); }
 
-            Travel travel = _travelCRUDServices.Add(_travelMapper.MapWriteModelToModel(newTravelWriteModel, destination));
+            Travel travel = _travelCRUDServices.Add(_travelMapper.MapWriteModelToModel(newTravelWriteModel), destination);
 
             _logger.LogInformation("INSERT (Travel): " + travel.ToString());
             return Ok(_travelMapper.MapModelToViewModel(travel));

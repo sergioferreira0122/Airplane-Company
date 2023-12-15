@@ -4,8 +4,8 @@ namespace webAPI.Application.Models.WriteModels
 {
     public class DestinationWriteModel
     {
-        [Required(ErrorMessage = "O campo Nome é obrigatório.")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "O campo Nome deve ter entre 3 e 50 caracteres.")]
+        [Required(ErrorMessage = "Name cannot be null.")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "min lenght 3, max lenght 50")]
         public required string Name { get; set; }
 
         [Range(0.0, 1_000_000)]

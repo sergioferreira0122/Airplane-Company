@@ -10,7 +10,7 @@ namespace webAPI.Application.Services.TravelServices
 
         Travel? GetById(int id);
 
-        Travel Add(Travel travel);
+        Travel Add(Travel travel, Destination destination);
 
         Travel Edit(Travel travel, TravelWriteModel travelWriteModel, Destination destination);
 

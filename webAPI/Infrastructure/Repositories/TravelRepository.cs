@@ -15,6 +15,9 @@ namespace webAPI.Infrastructure.Repositories
         public void Add(Travel entity)
         {
             _connectionContext.Travel.Add(entity);
+            
+            _connectionContext.Destination.Attach(entity.Destination);
+
             _connectionContext.SaveChanges();
         }
 

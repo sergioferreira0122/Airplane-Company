@@ -13,8 +13,10 @@ namespace webAPI.Application.Services.TravelServices
             _travelRepository = travelRepository;
         }
 
-        public Travel Add(Travel travel)
+        public Travel Add(Travel travel, Destination destination)
         {
+            travel.Destination = destination;
+
             _travelRepository.Add(travel);
 
             return travel;

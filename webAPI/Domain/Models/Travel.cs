@@ -9,7 +9,7 @@ namespace webAPI.Domain.Models
         [Key]
         public int Id { get; set; }
 
-        public required Destination Destination { get; set; }
+        public Destination? Destination { get; set; }
 
         public List<Client>? Client { get; set; }
 
