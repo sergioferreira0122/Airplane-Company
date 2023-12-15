@@ -21,13 +21,13 @@ namespace webAPI.Migrations
 
             modelBuilder.Entity("ClientTravel", b =>
                 {
-                    b.Property<int>("ClientId")
+                    b.Property<int>("ClientsId")
                         .HasColumnType("int");
 
                     b.Property<int>("TravelsId")
                         .HasColumnType("int");
 
-                    b.HasKey("ClientId", "TravelsId");
+                    b.HasKey("ClientsId", "TravelsId");
 
                     b.HasIndex("TravelsId");
 
@@ -46,7 +46,7 @@ namespace webAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Client");
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("webAPI.Domain.Models.Destination", b =>
@@ -64,7 +64,7 @@ namespace webAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Destination");
+                    b.ToTable("Destinations");
                 });
 
             modelBuilder.Entity("webAPI.Domain.Models.Travel", b =>
@@ -73,7 +73,7 @@ namespace webAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("DestinationId")
+                    b.Property<int?>("DestinationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -86,14 +86,14 @@ namespace webAPI.Migrations
 
                     b.HasIndex("DestinationId");
 
-                    b.ToTable("Travel");
+                    b.ToTable("Travels");
                 });
 
             modelBuilder.Entity("ClientTravel", b =>
                 {
                     b.HasOne("webAPI.Domain.Models.Client", null)
                         .WithMany()
-                        .HasForeignKey("ClientId")
+                        .HasForeignKey("ClientsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -108,9 +108,7 @@ namespace webAPI.Migrations
                 {
                     b.HasOne("webAPI.Domain.Models.Destination", "Destination")
                         .WithMany()
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DestinationId");
 
                     b.Navigation("Destination");
                 });

@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webAPI.Domain.Models
 {
-    [Table("Destination")]
     public class Destination
     {
         [Key]

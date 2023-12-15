@@ -1,14 +1,15 @@
 ﻿using webAPI.Application.Models.WriteModels;
 using webAPI.Domain.Models;
 using webAPI.Infrastructure.Repositories;
+using webAPI.Infrastructure.Repositories.TravelRepository;
 
 namespace webAPI.Application.Services.TravelServices
 {
-    public class TravelService : ITravelCRUDServices
+    public class TravelService : ITravelCRUDServices, ITravelClientService
     {
-        private readonly IRepository<Travel> _travelRepository;
+        private readonly ITravelRepository _travelRepository;
 
-        public TravelService(IRepository<Travel> travelRepository)
+        public TravelService(ITravelRepository travelRepository)
         {
             _travelRepository = travelRepository;
         }
@@ -54,7 +55,25 @@ namespace webAPI.Application.Services.TravelServices
         {
             Travel? travelFromRepository = _travelRepository.GetById(id);
 
-            return travelFromRepository?? null;
+            return travelFromRepository ?? null;
+        }
+
+        public Travel AddClient(Travel travel, Client client)
+        {
+            travel.AddClient(client);
+
+            _travelRepository.AddClient(travel, client);
+
+            return travel;
+        }
+
+        public Travel RemoveClient(Travel travel, Client client)
+        {
+            travel.RemoveClient(client);
+
+            _travelRepository.RemoveClient(travel, client);
+
+            return travel;
         }
     }
 }

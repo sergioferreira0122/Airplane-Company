@@ -3,9 +3,10 @@ using webAPI.Application.Mappers;
 using webAPI.Application.Services.ClientServices;
 using webAPI.Application.Services.DestinationServices;
 using webAPI.Application.Services.TravelServices;
-using webAPI.Domain.Models;
 using webAPI.Infrastructure;
-using webAPI.Infrastructure.Repositories;
+using webAPI.Infrastructure.Repositories.ClientRepository;
+using webAPI.Infrastructure.Repositories.DestinationRepository;
+using webAPI.Infrastructure.Repositories.TravelRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +22,9 @@ builder.Services.AddTransient<ConnectionContext, ConnectionContext>();
 //Connection
 
 //Repositories
-builder.Services.AddTransient<IRepository<Client>, ClientRepository>();
-builder.Services.AddTransient<IRepository<Destination>, DestinationRepository>();
-builder.Services.AddTransient<IRepository<Travel>, TravelRepository>();
+builder.Services.AddTransient<IClientRepository, ClientRepository>();
+builder.Services.AddTransient<IDestinationRepository, DestinationRepository>();
+builder.Services.AddTransient<ITravelRepository, TravelRepository>();
 //Repositories
 
 //Mappers
@@ -36,6 +37,7 @@ builder.Services.AddTransient<TravelMapper, TravelMapper>();
 builder.Services.AddTransient<IClientCRUDService, ClientService>();
 builder.Services.AddTransient<IDestinationCRUDService, DestinationService>();
 builder.Services.AddTransient<ITravelCRUDServices, TravelService>();
+builder.Services.AddTransient<ITravelClientService, TravelService>();
 //Services
 
 builder.Services.AddControllers();

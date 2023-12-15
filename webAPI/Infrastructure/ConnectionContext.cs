@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 using webAPI.Domain.Models;
 
 namespace webAPI.Infrastructure
@@ -7,9 +6,9 @@ namespace webAPI.Infrastructure
     public class ConnectionContext : DbContext
     {
         private readonly IConfiguration _configuration;
-        public DbSet<Client> Client { get; set; }
-        public DbSet<Travel> Travel { get; set; }
-        public DbSet<Destination> Destination { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Travel> Travels { get; set; }
+        public DbSet<Destination> Destinations { get; set; }
 
         public ConnectionContext(IConfiguration configuration)
         {
@@ -18,9 +17,8 @@ namespace webAPI.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(_configuration.GetConnectionString("Database"));
+            optionsBuilder.UseMySQL(_configuration.GetConnectionString("Database")!);
         }
 
-        
     }
 }

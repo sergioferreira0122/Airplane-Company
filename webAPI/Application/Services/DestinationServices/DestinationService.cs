@@ -1,14 +1,15 @@
 ﻿using webAPI.Application.Models.WriteModels;
 using webAPI.Domain.Models;
 using webAPI.Infrastructure.Repositories;
+using webAPI.Infrastructure.Repositories.DestinationRepository;
 
 namespace webAPI.Application.Services.DestinationServices
 {
     public class DestinationService : IDestinationCRUDService
     {
-        private readonly IRepository<Destination> _destinationRepository;
+        private readonly IDestinationRepository _destinationRepository;
 
-        public DestinationService(IRepository<Destination> destinationRepository)
+        public DestinationService(IDestinationRepository destinationRepository)
         {
             _destinationRepository = destinationRepository;
         }

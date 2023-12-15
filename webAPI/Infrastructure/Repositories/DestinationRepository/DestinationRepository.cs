@@ -2,9 +2,9 @@
 using MySqlX.XDevAPI;
 using webAPI.Domain.Models;
 
-namespace webAPI.Infrastructure.Repositories
+namespace webAPI.Infrastructure.Repositories.DestinationRepository
 {
-    public class DestinationRepository : IRepository<Destination>
+    public class DestinationRepository : IDestinationRepository
     {
         private readonly ConnectionContext _connectionContext;
 
@@ -15,30 +15,30 @@ namespace webAPI.Infrastructure.Repositories
 
         public void Add(Destination entity)
         {
-            _connectionContext.Destination.Add(entity);
+            _connectionContext.Destinations.Add(entity);
             _connectionContext.SaveChanges();
         }
 
         public void Delete(Destination entity)
         {
-            _connectionContext.Destination.Remove(entity);
+            _connectionContext.Destinations.Remove(entity);
             _connectionContext.SaveChanges();
         }
 
         public void Edit(Destination entity)
         {
-            _connectionContext.Destination.Entry(entity).State = EntityState.Modified;
+            _connectionContext.Destinations.Entry(entity).State = EntityState.Modified;
             _connectionContext.SaveChanges();
         }
 
         public IEnumerable<Destination> GetAll()
         {
-            return _connectionContext.Destination.ToList();
+            return _connectionContext.Destinations.ToList();
         }
 
         public Destination? GetById(int id)
         {
-            return _connectionContext.Destination.FirstOrDefault(x => x.Id == id);
+            return _connectionContext.Destinations.FirstOrDefault(x => x.Id == id);
         }
     }
 }

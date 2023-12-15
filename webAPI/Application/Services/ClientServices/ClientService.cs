@@ -1,14 +1,15 @@
 ﻿using webAPI.Application.Models.WriteModels;
 using webAPI.Domain.Models;
 using webAPI.Infrastructure.Repositories;
+using webAPI.Infrastructure.Repositories.ClientRepository;
 
 namespace webAPI.Application.Services.ClientServices
 {
     public class ClientService : IClientCRUDService
     {
-        private readonly IRepository<Client> _clientRepository;
+        private readonly IClientRepository _clientRepository;
 
-        public ClientService(IRepository<Client> clientRepository)
+        public ClientService(IClientRepository clientRepository)
         {
             _clientRepository = clientRepository;
         }
