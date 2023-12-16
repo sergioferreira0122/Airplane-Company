@@ -1,5 +1,4 @@
-﻿using webAPI.Application.Models.ViewModels;
-using webAPI.Domain.Models;
+﻿using webAPI.Domain.Models;
 using webAPI.Presentation.Models.WriteModels;
 
 namespace webAPI.Application.Services.DestinationServices
