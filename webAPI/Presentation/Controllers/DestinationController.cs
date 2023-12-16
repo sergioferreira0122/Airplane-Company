@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using webAPI.Application.Services.DestinationServices;
-using webAPI.Domain.Models;
+﻿using Airplane.Domain.Entities;
+using Airplane.Domain.Interfaces.DestinationInterfaces;
+using Microsoft.AspNetCore.Mvc;
 using webAPI.Presentation.Mappers;
 using webAPI.Presentation.Models.WriteModels;
 
@@ -68,7 +68,7 @@ namespace webAPI.Presentation.Controllers
             Destination? destination = _destinationCRUDService.GetById(id);
             if (destination == null) { return NotFound("Destination not found."); }
 
-            Destination destinationUpdated = _destinationCRUDService.Edit(destination, updatedDestinationWriteModel);
+            Destination destinationUpdated = _destinationCRUDService.Edit(destination, _destinationMapper.MapWriteModelToModel(updatedDestinationWriteModel));
 
             _logger.LogInformation("UPDATE (Destination): " + destinationUpdated.ToString());
             return Ok(_destinationMapper.MapModelToViewModel(destination));

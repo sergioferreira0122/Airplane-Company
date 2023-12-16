@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+	
+  <ItemGroup>
+    <None Remove="Controllers\" />
+    <None Remove="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MySql.Data" Version="8.2.0" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Airplane.Application\Airplane.Application.csproj" />
+    <ProjectReference Include="..\Airplane.Infrastructure\Airplane.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

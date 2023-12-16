@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using webAPI.Application.Services.ClientServices;
-using webAPI.Application.Services.DestinationServices;
-using webAPI.Application.Services.TravelServices;
-using webAPI.Domain.Models;
+﻿using Airplane.Domain.Entities;
+using Airplane.Domain.Interfaces.ClientInterfaces;
+using Airplane.Domain.Interfaces.DestinationInterfaces;
+using Airplane.Domain.Interfaces.TravelInterfaces;
+using Microsoft.AspNetCore.Mvc;
 using webAPI.Presentation.Mappers;
 using webAPI.Presentation.Models.WriteModels;
 
@@ -90,7 +90,7 @@ namespace webAPI.Presentation.Controllers
             Destination? destination = _destinationCRUDService.GetById(updatedTravelWriteModel.DestinationId);
             if (destination == null) { return BadRequest("Destination not found."); }
 
-            Travel travelUpdated = _travelCRUDServices.Edit(travel, updatedTravelWriteModel, destination);
+            Travel travelUpdated = _travelCRUDServices.Edit(travel, _travelMapper.MapWriteModelToModel(updatedTravelWriteModel), destination);
 
             _logger.LogInformation("UPDATE (Travel): " + travel.ToString());
             return Ok(_travelMapper.MapModelToViewModel(travelUpdated));

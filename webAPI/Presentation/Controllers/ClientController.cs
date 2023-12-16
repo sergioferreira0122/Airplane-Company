@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using webAPI.Application.Services.ClientServices;
-using webAPI.Domain.Models;
+﻿using Airplane.Domain.Entities;
+using Airplane.Domain.Interfaces.ClientInterfaces;
+using Microsoft.AspNetCore.Mvc;
 using webAPI.Presentation.Mappers;
 using webAPI.Presentation.Models.WriteModels;
 
@@ -68,7 +68,7 @@ namespace webAPI.Presentation.Controllers
             Client? client = _clientCRUDService.GetById(id);
             if (client == null) { return NotFound("Client not found."); }
 
-            Client clientUpdated = _clientCRUDService.Edit(client, updatedClientWriteModel);
+            Client clientUpdated = _clientCRUDService.Edit(client, _clientMapper.MapWriteModelToModel(updatedClientWriteModel));
 
             _logger.LogInformation("UPDATE (Client): " + clientUpdated.ToString());
             return Ok(_clientMapper.MapModelToViewModel(clientUpdated));

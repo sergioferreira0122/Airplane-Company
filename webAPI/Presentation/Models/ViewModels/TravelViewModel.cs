@@ -6,9 +6,9 @@
 
         public int DestinationId { get; set; }
 
-        public required string DestinationName { get; set; }
+        public string DestinationName { get; set; }
 
-        public required decimal DestinationPrice { get; set; }
+        public decimal DestinationPrice { get; set; }
 
         public DateTime StartDate { get; set; }
 

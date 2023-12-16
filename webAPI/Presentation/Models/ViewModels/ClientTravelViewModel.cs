@@ -3,7 +3,7 @@
     public class ClientTravelViewModel
     {
         public int ClientId { get; set; }
-        public required string ClientName { get; set; }
-        public required TravelViewModel Travel { get; set; }
+        public string ClientName { get; set; }
+        public TravelViewModel Travel { get; set; }
     }
 }

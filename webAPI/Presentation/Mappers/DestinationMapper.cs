@@ -1,4 +1,4 @@
-﻿using webAPI.Domain.Models;
+﻿using Airplane.Domain.Entities;
 using webAPI.Presentation.Models.ViewModels;
 using webAPI.Presentation.Models.WriteModels;
 
