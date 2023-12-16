@@ -1,8 +1,8 @@
-﻿using webAPI.Application.Models.ViewModels;
-using webAPI.Application.Models.WriteModels;
-using webAPI.Domain.Models;
+﻿using webAPI.Domain.Models;
+using webAPI.Presentation.Models.ViewModels;
+using webAPI.Presentation.Models.WriteModels;
 
-namespace webAPI.Application.Mappers
+namespace webAPI.Presentation.Mappers
 {
     public class TravelMapper
     {

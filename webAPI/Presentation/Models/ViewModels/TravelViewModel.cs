@@ -1,4 +1,4 @@
-﻿namespace webAPI.Application.Models.ViewModels
+﻿namespace webAPI.Presentation.Models.ViewModels
 {
     public class TravelViewModel
     {

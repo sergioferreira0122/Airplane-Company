@@ -1,7 +1,7 @@
-﻿using webAPI.Application.Models.ViewModels;
-using webAPI.Domain.Models;
+﻿using webAPI.Domain.Models;
+using webAPI.Presentation.Models.ViewModels;
 
-namespace webAPI.Application.Mappers
+namespace webAPI.Presentation.Mappers
 {
     public class ClientTravelMapper
     {

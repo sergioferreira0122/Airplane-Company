@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using webAPI.Application.Mappers;
 using webAPI.Application.Services.ClientServices;
 using webAPI.Application.Services.DestinationServices;
 using webAPI.Application.Services.TravelServices;
@@ -7,6 +6,7 @@ using webAPI.Infrastructure;
 using webAPI.Infrastructure.Repositories.ClientRepository;
 using webAPI.Infrastructure.Repositories.DestinationRepository;
 using webAPI.Infrastructure.Repositories.TravelRepository;
+using webAPI.Presentation.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using webAPI.Application.Mappers;
-using webAPI.Application.Models.WriteModels;
 using webAPI.Application.Services.ClientServices;
 using webAPI.Application.Services.DestinationServices;
 using webAPI.Application.Services.TravelServices;
 using webAPI.Domain.Models;
+using webAPI.Presentation.Mappers;
+using webAPI.Presentation.Models.WriteModels;
 
 namespace webAPI.Presentation.Controllers
 {

@@ -1,7 +1,7 @@
-﻿using webAPI.Application.Models.WriteModels;
-using webAPI.Domain.Models;
+﻿using webAPI.Domain.Models;
 using webAPI.Infrastructure.Repositories;
 using webAPI.Infrastructure.Repositories.TravelRepository;
+using webAPI.Presentation.Models.WriteModels;
 
 namespace webAPI.Application.Services.TravelServices
 {
