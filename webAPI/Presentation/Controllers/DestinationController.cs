@@ -4,7 +4,7 @@ using webAPI.Application.Models.WriteModels;
 using webAPI.Application.Services.DestinationServices;
 using webAPI.Domain.Models;
 
-namespace webAPI.Controllers
+namespace webAPI.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

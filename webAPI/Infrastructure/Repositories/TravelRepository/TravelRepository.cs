@@ -38,7 +38,7 @@ namespace webAPI.Infrastructure.Repositories.TravelRepository
         {
             return _connectionContext.Travels
                 .Include("Destination")
-                .Include("Clients")
+                .Include("ClientTravels")
                 .ToList();
         }
 
@@ -46,24 +46,23 @@ namespace webAPI.Infrastructure.Repositories.TravelRepository
         {
             return _connectionContext.Travels
                 .Include("Destination")
-                .Include("Clients")
+                .Include("ClientTravels")
                 .FirstOrDefault(x => x.Id == id);
         }
 
-        public void AddClient(Travel entity, Client client)
+        public void AddClient(ClientTravel clientTravel)
         {
-            _connectionContext.Clients.Entry(client).State = EntityState.Modified;
+            _connectionContext.Clients.Attach(clientTravel.Client);
+            _connectionContext.Travels.Attach(clientTravel.Travel);
 
-            _connectionContext.Travels.Entry(entity).State = EntityState.Modified;
+            _connectionContext.ClientTravels.Add(clientTravel);
 
             _connectionContext.SaveChanges();
         }
 
-        public void RemoveClient(Travel entity, Client client)
+        public void RemoveClient(ClientTravel clientTravel)
         {
-            _connectionContext.Clients.Attach(client).State = EntityState.Modified;
-
-            _connectionContext.Travels.Entry(entity).State = EntityState.Modified;
+            _connectionContext.ClientTravels.Entry(clientTravel).State = EntityState.Deleted;
 
             _connectionContext.SaveChanges();
         }

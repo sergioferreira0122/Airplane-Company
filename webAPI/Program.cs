@@ -31,6 +31,7 @@ builder.Services.AddTransient<ITravelRepository, TravelRepository>();
 builder.Services.AddTransient<ClientMapper, ClientMapper>();
 builder.Services.AddTransient<DestinationMapper, DestinationMapper>();
 builder.Services.AddTransient<TravelMapper, TravelMapper>();
+builder.Services.AddTransient<ClientTravelMapper, ClientTravelMapper>();
 //Mappers
 
 //Services

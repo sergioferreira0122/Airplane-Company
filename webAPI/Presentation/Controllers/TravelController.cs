@@ -6,7 +6,7 @@ using webAPI.Application.Services.DestinationServices;
 using webAPI.Application.Services.TravelServices;
 using webAPI.Domain.Models;
 
-namespace webAPI.Controllers
+namespace webAPI.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -18,13 +18,15 @@ namespace webAPI.Controllers
         private readonly ITravelClientService _travelClientService;
         private readonly IClientCRUDService _clientCRUDService;
         private readonly TravelMapper _travelMapper;
+        private readonly ClientTravelMapper _clientTravelMapper;
 
         public TravelController(ILogger<TravelController> logger,
             ITravelCRUDServices travelCRUDServices,
             IDestinationCRUDService destinationCRUDServices,
             TravelMapper travelMapper,
             ITravelClientService travelClientService,
-            IClientCRUDService clientCRUDService)
+            IClientCRUDService clientCRUDService,
+            ClientTravelMapper clientTravelMapper)
         {
             _logger = logger;
             _travelCRUDServices = travelCRUDServices;
@@ -32,6 +34,7 @@ namespace webAPI.Controllers
             _travelMapper = travelMapper;
             _travelClientService = travelClientService;
             _clientCRUDService = clientCRUDService;
+            _clientTravelMapper = clientTravelMapper;
         }
 
         [HttpGet()]
@@ -69,7 +72,7 @@ namespace webAPI.Controllers
         [HttpPost()]
         public IActionResult Post(TravelWriteModel newTravelWriteModel)
         {
-            Destination? destination= _destinationCRUDService.GetById(newTravelWriteModel.DestinationId);
+            Destination? destination = _destinationCRUDService.GetById(newTravelWriteModel.DestinationId);
             if (destination == null) { return BadRequest("Destination not found."); }
 
             Travel travel = _travelCRUDServices.Add(_travelMapper.MapWriteModelToModel(newTravelWriteModel), destination);
@@ -102,10 +105,10 @@ namespace webAPI.Controllers
             Client? client = _clientCRUDService.GetById(clientId);
             if (client == null) { return NotFound("Client not found."); }
 
-            Travel travelUpdated = _travelClientService.AddClient(travel, client);
+            ClientTravel clientTravelUpdated = _travelClientService.AddClient(travel, client);
 
             _logger.LogInformation("ADD CLIENT(ID:" + client.Id + ") TO TRAVEL(ID:" + travel.Id + ")");
-            return Ok(_travelMapper.MapModelToTravelClientViewModel(travelUpdated));
+            return Ok(_clientTravelMapper.MapClientTravelToClientTravelViewModel(clientTravelUpdated));
         }
 
         [HttpPut("remove/client/{travelId}/{clientId}")]
@@ -117,10 +120,10 @@ namespace webAPI.Controllers
             Client? client = _clientCRUDService.GetById(clientId);
             if (client == null) { return NotFound("Client not found."); }
 
-            Travel travelUpdated = _travelClientService.RemoveClient(travel, client);
+            ClientTravel clientTravelUpdated = _travelClientService.RemoveClient(travel, client);
 
             _logger.LogInformation("REMOVE CLIENT(ID:" + client.Id + ") FROM TRAVEL(ID:" + travel.Id + ")");
-            return Ok(_travelMapper.MapModelToTravelClientViewModel(travelUpdated));
+            return Ok(_clientTravelMapper.MapClientTravelToClientTravelViewModel(clientTravelUpdated));
         }
     }
 }

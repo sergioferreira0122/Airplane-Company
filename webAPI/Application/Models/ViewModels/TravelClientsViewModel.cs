@@ -3,6 +3,6 @@
     public class TravelClientsViewModel
     {
         public int TravelId { get; set; }
-        public List<ClientViewModel>? Clients { get; set; }
+        public ICollection<ClientViewModel>? Clients { get; set; }
     }
 }

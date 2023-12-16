@@ -12,9 +12,8 @@ namespace webAPI.Domain.Models
 
         public decimal Price { get; set; }
 
-        public override string ToString()
-        {
-            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Name)}={Name}, {nameof(Price)}={Price.ToString()}}}";
-        }
+        public ICollection<ClientDestination>? ClientDestinations { get; set; }
+
+        public ICollection<Travel>? Travels { get; set; }
     }
 }

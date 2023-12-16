@@ -4,7 +4,7 @@ namespace webAPI.Application.Services.TravelServices
 {
     public interface ITravelClientService
     {
-        Travel AddClient(Travel travel, Client client);
-        Travel RemoveClient(Travel travel, Client client);
+        ClientTravel AddClient(Travel travel, Client client);
+        ClientTravel RemoveClient(Travel travel, Client client);
     }
 }

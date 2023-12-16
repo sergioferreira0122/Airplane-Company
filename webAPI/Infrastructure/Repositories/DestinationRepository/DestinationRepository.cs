@@ -33,12 +33,18 @@ namespace webAPI.Infrastructure.Repositories.DestinationRepository
 
         public IEnumerable<Destination> GetAll()
         {
-            return _connectionContext.Destinations.ToList();
+            return _connectionContext.Destinations
+                .Include("ClientDestinations")
+                .Include("Travels")
+                .ToList();
         }
 
         public Destination? GetById(int id)
         {
-            return _connectionContext.Destinations.FirstOrDefault(x => x.Id == id);
+            return _connectionContext.Destinations
+                .Include("ClientDestinations")
+                .Include("Travels")
+                .FirstOrDefault(x => x.Id == id);
         }
     }
 }

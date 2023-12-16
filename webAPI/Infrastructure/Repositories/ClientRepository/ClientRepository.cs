@@ -33,14 +33,16 @@ namespace webAPI.Infrastructure.Repositories.ClientRepository
         public IEnumerable<Client> GetAll()
         {
             return _connectionContext.Clients
-                .Include("Travels")
+                .Include("ClientTravels")
+                .Include("ClientDestinations")
                 .ToList();
         }
 
         public Client? GetById(int id)
         {
             return _connectionContext.Clients
-                .Include("Travels")
+                .Include("ClientTravels")
+                .Include("ClientDestinations")
                 .FirstOrDefault(x => x.Id == id);
         }
     }

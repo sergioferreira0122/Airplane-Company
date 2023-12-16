@@ -5,7 +5,7 @@ using webAPI.Application.Models.WriteModels;
 using webAPI.Application.Services.ClientServices;
 using webAPI.Domain.Models;
 
-namespace webAPI.Controllers
+namespace webAPI.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -15,7 +15,7 @@ namespace webAPI.Controllers
         private readonly IClientCRUDService _clientCRUDService;
         private readonly ClientMapper _clientMapper;
 
-        public ClientController(ILogger<ClientController> logger ,IClientCRUDService clientCRUDService, ClientMapper clientMapper)
+        public ClientController(ILogger<ClientController> logger, IClientCRUDService clientCRUDService, ClientMapper clientMapper)
         {
             _logger = logger;
             _clientCRUDService = clientCRUDService;

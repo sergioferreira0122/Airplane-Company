@@ -14,7 +14,7 @@ namespace webAPI.Infrastructure.Repositories.TravelRepository
 
         void Delete(Travel entity);
 
-        void AddClient (Travel entity, Client client);
-        void RemoveClient(Travel entity, Client client);
+        void AddClient (ClientTravel clientTravel);
+        void RemoveClient(ClientTravel clientTravel);
     }
 }

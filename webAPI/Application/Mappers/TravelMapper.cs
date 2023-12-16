@@ -6,13 +6,6 @@ namespace webAPI.Application.Mappers
 {
     public class TravelMapper
     {
-        private readonly ClientMapper _clientMapper;
-
-        public TravelMapper(ClientMapper clientMapper)
-        {
-            _clientMapper = clientMapper;
-        }
-
         public Travel MapWriteModelToModel(TravelWriteModel travelWriteModel)
         {
             Travel travel = new Travel
@@ -49,17 +42,6 @@ namespace webAPI.Application.Mappers
             }
 
             return list;
-        }
-
-        public TravelClientsViewModel MapModelToTravelClientViewModel(Travel travel)
-        {
-            TravelClientsViewModel tr = new TravelClientsViewModel
-            {
-                TravelId = travel.Id,
-                Clients = _clientMapper.MapModelListToViewModelList(travel.Clients!),
-            };
-
-            return tr;
         }
     }
 }

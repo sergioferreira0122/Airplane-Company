@@ -58,22 +58,34 @@ namespace webAPI.Application.Services.TravelServices
             return travelFromRepository ?? null;
         }
 
-        public Travel AddClient(Travel travel, Client client)
+        public ClientTravel AddClient(Travel travel, Client client)
         {
-            travel.AddClient(client);
+            ClientTravel clientTravel = new ClientTravel
+            {
+                Travel = travel,
+                Client = client,
+                TravelId = travel.Id,
+                ClientId = client.Id,
+            };
 
-            _travelRepository.AddClient(travel, client);
+            _travelRepository.AddClient(clientTravel);
 
-            return travel;
+            return clientTravel;
         }
 
-        public Travel RemoveClient(Travel travel, Client client)
+        public ClientTravel RemoveClient(Travel travel, Client client)
         {
-            travel.RemoveClient(client);
+            ClientTravel clientTravel = new ClientTravel
+            {
+                Travel = travel,
+                Client = client,
+                TravelId = travel.Id,
+                ClientId = client.Id,
+            };
 
-            _travelRepository.RemoveClient(travel, client);
+            _travelRepository.RemoveClient(clientTravel);
 
-            return travel;
+            return clientTravel;
         }
     }
 }
