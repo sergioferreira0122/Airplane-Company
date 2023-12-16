@@ -1,7 +1,6 @@
 ﻿using Airplane.Domain.Entities;
 using Airplane.Domain.Interfaces.DestinationInterfaces;
 using Microsoft.EntityFrameworkCore;
-using webAPI.Infrastructure;
 
 namespace Airplane.Infrastructure.Repositories
 {

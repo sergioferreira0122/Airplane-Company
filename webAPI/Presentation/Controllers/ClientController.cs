@@ -1,77 +1,77 @@
-﻿using Airplane.Domain.Entities;
-using Airplane.Domain.Interfaces.ClientInterfaces;
+﻿using Airplane.Domain.Interfaces.ClientInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using webAPI.Presentation.Mappers;
 using webAPI.Presentation.Models.WriteModels;
 
-namespace webAPI.Presentation.Controllers
+namespace webAPI.Presentation.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class ClientController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ClientController : ControllerBase
+    private readonly IClientCrudService _clientCrudService;
+    private readonly ClientMapper _clientMapper;
+    private readonly ILogger<ClientController> _logger;
+
+    public ClientController(ILogger<ClientController> logger, IClientCrudService clientCrudService,
+        ClientMapper clientMapper)
     {
-        private readonly ILogger<ClientController> _logger;
-        private readonly IClientCRUDService _clientCRUDService;
-        private readonly ClientMapper _clientMapper;
+        _logger = logger;
+        _clientCrudService = clientCrudService;
+        _clientMapper = clientMapper;
+    }
 
-        public ClientController(ILogger<ClientController> logger, IClientCRUDService clientCRUDService, ClientMapper clientMapper)
-        {
-            _logger = logger;
-            _clientCRUDService = clientCRUDService;
-            _clientMapper = clientMapper;
-        }
+    [HttpGet]
+    public IActionResult Get()
+    {
+        var clients = _clientCrudService.GetAll();
+        if (clients.Count == 0) return NoContent();
 
-        [HttpGet()]
-        public IActionResult Get()
-        {
-            List<Client> clients = _clientCRUDService.GetAll();
-            if (clients.Count == 0) { return NoContent(); }
+        _logger.LogInformation("GET ALL (Client)");
+        return Ok(_clientMapper.MapModelListToViewModelList(clients));
+    }
 
-            _logger.LogInformation("GET ALL (Client)");
-            return Ok(_clientMapper.MapModelListToViewModelList(clients));
-        }
+    [HttpGet("{id}")]
+    public IActionResult GetById(int id)
+    {
+        var client = _clientCrudService.GetById(id);
+        if (client == null) return NotFound("Client not found.");
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            Client? client = _clientCRUDService.GetById(id);
-            if (client == null) { return NotFound("Client not found."); }
+        _logger.LogInformation("GET (Client): " + client);
+        return Ok(_clientMapper.MapModelToViewModel(client));
+    }
 
-            _logger.LogInformation("GET (Client): " + client.ToString());
-            return Ok(_clientMapper.MapModelToViewModel(client));
-        }
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var client = _clientCrudService.GetById(id);
+        if (client == null) return NotFound("Client not found.");
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            Client? client = _clientCRUDService.GetById(id);
-            if (client == null) { return NotFound("Client not found."); }
+        _clientCrudService.Delete(client);
 
-            _clientCRUDService.Delete(client);
+        _logger.LogInformation("DELETE (Client): " + client);
+        return Ok("Client deleted.");
+    }
 
-            _logger.LogInformation("DELETE (Client): " + client.ToString());
-            return Ok("Client deleted.");
-        }
+    [HttpPost]
+    public IActionResult Post(ClientWriteModel clientWriteModel)
+    {
+        var client = _clientCrudService.Add(_clientMapper.MapWriteModelToModel(clientWriteModel));
 
-        [HttpPost()]
-        public IActionResult Post(ClientWriteModel clientWriteModel)
-        {
-            Client client = _clientCRUDService.Add(_clientMapper.MapWriteModelToModel(clientWriteModel));
+        _logger.LogInformation("INSERT (Client): " + client);
+        return Ok(_clientMapper.MapModelToViewModel(client));
+    }
 
-            _logger.LogInformation("INSERT (Client): " + client.ToString());
-            return Ok(_clientMapper.MapModelToViewModel(client));
-        }
+    [HttpPut("{id}")]
+    public IActionResult Put(int id, [FromBody] ClientWriteModel updatedClientWriteModel)
+    {
+        var client = _clientCrudService.GetById(id);
+        if (client == null) return NotFound("Client not found.");
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ClientWriteModel updatedClientWriteModel)
-        {
-            Client? client = _clientCRUDService.GetById(id);
-            if (client == null) { return NotFound("Client not found."); }
+        var clientUpdated =
+            _clientCrudService.Edit(client, _clientMapper.MapWriteModelToModel(updatedClientWriteModel));
 
-            Client clientUpdated = _clientCRUDService.Edit(client, _clientMapper.MapWriteModelToModel(updatedClientWriteModel));
-
-            _logger.LogInformation("UPDATE (Client): " + clientUpdated.ToString());
-            return Ok(_clientMapper.MapModelToViewModel(clientUpdated));
-        }
+        _logger.LogInformation("UPDATE (Client): " + clientUpdated);
+        return Ok(_clientMapper.MapModelToViewModel(clientUpdated));
     }
 }

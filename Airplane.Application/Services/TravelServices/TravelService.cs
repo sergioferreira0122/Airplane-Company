@@ -3,7 +3,7 @@ using Airplane.Domain.Interfaces.TravelInterfaces;
 
 namespace webAPI.Application.Services.TravelServices
 {
-    public class TravelService : ITravelCRUDServices, ITravelClientService
+    public class TravelService : ITravelCrudServices, ITravelClientService
     {
         private readonly ITravelRepository _travelRepository;
 
@@ -51,14 +51,14 @@ namespace webAPI.Application.Services.TravelServices
 
         public Travel? GetById(int id)
         {
-            Travel? travelFromRepository = _travelRepository.GetById(id);
+            var travelFromRepository = _travelRepository.GetById(id);
 
             return travelFromRepository ?? null;
         }
 
         public ClientTravel AddClient(Travel travel, Client client)
         {
-            ClientTravel clientTravel = new ClientTravel
+            var clientTravel = new ClientTravel
             {
                 Travel = travel,
                 Client = client,
@@ -73,7 +73,7 @@ namespace webAPI.Application.Services.TravelServices
 
         public ClientTravel RemoveClient(Travel travel, Client client)
         {
-            ClientTravel clientTravel = new ClientTravel
+            var clientTravel = new ClientTravel
             {
                 Travel = travel,
                 Client = client,

@@ -14,7 +14,7 @@ namespace webAPI.Presentation.Mappers
 
         public ClientTravelViewModel MapClientTravelToClientTravelViewModel(ClientTravel clientTravel)
         {
-            ClientTravelViewModel clientTravelViewModel = new ClientTravelViewModel
+            var clientTravelViewModel = new ClientTravelViewModel
             {
                 ClientId = clientTravel.Client.Id,
                 ClientName = clientTravel.Client.Name,

@@ -3,7 +3,7 @@ using Airplane.Domain.Interfaces.ClientInterfaces;
 
 namespace webAPI.Application.Services.ClientServices
 {
-    public class ClientService : IClientCRUDService
+    public class ClientService : IClientCrudService
     {
         private readonly IClientRepository _clientRepository;
 
@@ -47,7 +47,7 @@ namespace webAPI.Application.Services.ClientServices
 
         public Client? GetById(int id)
         {
-            Client? clientFromRepository = _clientRepository.GetById(id);
+            var clientFromRepository = _clientRepository.GetById(id);
 
             return clientFromRepository ?? null;
         }

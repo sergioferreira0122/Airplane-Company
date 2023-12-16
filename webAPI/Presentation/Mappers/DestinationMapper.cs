@@ -2,43 +2,39 @@
 using webAPI.Presentation.Models.ViewModels;
 using webAPI.Presentation.Models.WriteModels;
 
-namespace webAPI.Presentation.Mappers
+namespace webAPI.Presentation.Mappers;
+
+public class DestinationMapper
 {
-    public class DestinationMapper
+    public Destination MapWriteModelToModel(DestinationWriteModel destinationWriteModel)
     {
-        public Destination MapWriteModelToModel(DestinationWriteModel destinationWriteModel)
+        var destination = new Destination
         {
-            Destination destination = new Destination
-            {
-                Name = destinationWriteModel.Name,
-                Price = destinationWriteModel.Price,
-            };
+            Name = destinationWriteModel.Name,
+            Price = destinationWriteModel.Price
+        };
 
-            return destination;
-        }
+        return destination;
+    }
 
-        public DestinationViewModel MapModelToViewModel(Destination destination)
+    public DestinationViewModel MapModelToViewModel(Destination destination)
+    {
+        var destinationViewModel = new DestinationViewModel
         {
-            DestinationViewModel destinationViewModel = new DestinationViewModel
-            {
-                Id = destination.Id,
-                Name = destination.Name,
-                Price = destination.Price,
-            };
+            Id = destination.Id,
+            Name = destination.Name,
+            Price = destination.Price
+        };
 
-            return destinationViewModel;
-        }
+        return destinationViewModel;
+    }
 
-        public List<DestinationViewModel> MapModelListToViewModelList(List<Destination> destinations)
-        {
-            List<DestinationViewModel> list = new List<DestinationViewModel>();
+    public List<DestinationViewModel> MapModelListToViewModelList(List<Destination> destinations)
+    {
+        var list = new List<DestinationViewModel>();
 
-            foreach (Destination destination in destinations)
-            {
-                list.Add(MapModelToViewModel(destination));
-            }
+        foreach (var destination in destinations) list.Add(MapModelToViewModel(destination));
 
-            return list;
-        }
+        return list;
     }
 }

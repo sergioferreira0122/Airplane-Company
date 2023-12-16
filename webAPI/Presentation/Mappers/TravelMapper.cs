@@ -2,46 +2,42 @@
 using webAPI.Presentation.Models.ViewModels;
 using webAPI.Presentation.Models.WriteModels;
 
-namespace webAPI.Presentation.Mappers
+namespace webAPI.Presentation.Mappers;
+
+public class TravelMapper
 {
-    public class TravelMapper
+    public Travel MapWriteModelToModel(TravelWriteModel travelWriteModel)
     {
-        public Travel MapWriteModelToModel(TravelWriteModel travelWriteModel)
+        var travel = new Travel
         {
-            Travel travel = new Travel
-            {
-                StartDate = travelWriteModel.StartDate,
-                EndDate = travelWriteModel.EndDate,
-            };
+            StartDate = travelWriteModel.StartDate,
+            EndDate = travelWriteModel.EndDate
+        };
 
-            return travel;
-        }
+        return travel;
+    }
 
-        public TravelViewModel MapModelToViewModel(Travel travel)
+    public TravelViewModel MapModelToViewModel(Travel travel)
+    {
+        var travelViewModel = new TravelViewModel
         {
-            TravelViewModel travelViewModel = new TravelViewModel
-            {
-                Id = travel.Id,
-                DestinationId = travel.Destination!.Id,
-                DestinationName = travel.Destination!.Name,
-                DestinationPrice = travel.Destination!.Price,
-                StartDate = travel.StartDate,
-                EndDate = travel.EndDate,
-            };
+            Id = travel.Id,
+            DestinationId = travel.Destination!.Id,
+            DestinationName = travel.Destination!.Name,
+            DestinationPrice = travel.Destination!.Price,
+            StartDate = travel.StartDate,
+            EndDate = travel.EndDate
+        };
 
-            return travelViewModel;
-        }
+        return travelViewModel;
+    }
 
-        public List<TravelViewModel> MapModelListToViewModelList(List<Travel> travels)
-        {
-            List<TravelViewModel> list = new List<TravelViewModel>();
+    public List<TravelViewModel> MapModelListToViewModelList(List<Travel> travels)
+    {
+        var list = new List<TravelViewModel>();
 
-            foreach (Travel travel in travels)
-            {
-                list.Add(MapModelToViewModel(travel));
-            }
+        foreach (var travel in travels) list.Add(MapModelToViewModel(travel));
 
-            return list;
-        }
+        return list;
     }
 }

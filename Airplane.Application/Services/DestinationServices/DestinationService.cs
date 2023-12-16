@@ -3,7 +3,7 @@ using Airplane.Domain.Interfaces.DestinationInterfaces;
 
 namespace webAPI.Application.Services.DestinationServices
 {
-    public class DestinationService : IDestinationCRUDService
+    public class DestinationService : IDestinationCrudService
     {
         private readonly IDestinationRepository _destinationRepository;
 
@@ -48,7 +48,7 @@ namespace webAPI.Application.Services.DestinationServices
 
         public Destination? GetById(int id)
         {
-            Destination? destinationFromRepository = _destinationRepository.GetById(id);
+            var destinationFromRepository = _destinationRepository.GetById(id);
 
             return destinationFromRepository ?? null;
         }

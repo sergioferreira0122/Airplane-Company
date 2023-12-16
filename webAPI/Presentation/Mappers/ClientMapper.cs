@@ -2,41 +2,37 @@
 using webAPI.Presentation.Models.ViewModels;
 using webAPI.Presentation.Models.WriteModels;
 
-namespace webAPI.Presentation.Mappers
+namespace webAPI.Presentation.Mappers;
+
+public class ClientMapper
 {
-    public class ClientMapper
+    public Client MapWriteModelToModel(ClientWriteModel clientWriteModel)
     {
-        public Client MapWriteModelToModel(ClientWriteModel clientWriteModel)
+        var client = new Client
         {
-            Client client = new Client
-            {
-                Name = clientWriteModel.Name,
-            };
+            Name = clientWriteModel.Name
+        };
 
-            return client;
-        }
+        return client;
+    }
 
-        public ClientViewModel MapModelToViewModel(Client client)
+    public ClientViewModel MapModelToViewModel(Client client)
+    {
+        var clientViewModel = new ClientViewModel
         {
-            ClientViewModel clientViewModel = new ClientViewModel
-            {
-                Id = client.Id,
-                Name = client.Name,
-            };
+            Id = client.Id,
+            Name = client.Name
+        };
 
-            return clientViewModel;
-        }
+        return clientViewModel;
+    }
 
-        public List<ClientViewModel> MapModelListToViewModelList(List<Client> clients)
-        {
-            List<ClientViewModel> list = new List<ClientViewModel>();
+    public List<ClientViewModel> MapModelListToViewModelList(List<Client> clients)
+    {
+        var list = new List<ClientViewModel>();
 
-            foreach (Client client in clients)
-            {
-                list.Add(MapModelToViewModel(client));
-            }
+        foreach (var client in clients) list.Add(MapModelToViewModel(client));
 
-            return list;
-        }
+        return list;
     }
 }

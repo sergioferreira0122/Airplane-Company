@@ -3,10 +3,10 @@ using Airplane.Domain.Interfaces.DestinationInterfaces;
 using Airplane.Domain.Interfaces.TravelInterfaces;
 using Airplane.Infrastructure.Repositories;
 using System.Reflection;
+using Airplane.Infrastructure;
 using webAPI.Application.Services.ClientServices;
 using webAPI.Application.Services.DestinationServices;
 using webAPI.Application.Services.TravelServices;
-using webAPI.Infrastructure;
 using webAPI.Presentation.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,9 +36,9 @@ builder.Services.AddTransient<ClientTravelMapper, ClientTravelMapper>();
 //Mappers
 
 //Services
-builder.Services.AddTransient<IClientCRUDService, ClientService>();
-builder.Services.AddTransient<IDestinationCRUDService, DestinationService>();
-builder.Services.AddTransient<ITravelCRUDServices, TravelService>();
+builder.Services.AddTransient<IClientCrudService, ClientService>();
+builder.Services.AddTransient<IDestinationCrudService, DestinationService>();
+builder.Services.AddTransient<ITravelCrudServices, TravelService>();
 builder.Services.AddTransient<ITravelClientService, TravelService>();
 //Services
 

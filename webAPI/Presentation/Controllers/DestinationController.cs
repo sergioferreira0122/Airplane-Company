@@ -1,77 +1,77 @@
-﻿using Airplane.Domain.Entities;
-using Airplane.Domain.Interfaces.DestinationInterfaces;
+﻿using Airplane.Domain.Interfaces.DestinationInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using webAPI.Presentation.Mappers;
 using webAPI.Presentation.Models.WriteModels;
 
-namespace webAPI.Presentation.Controllers
+namespace webAPI.Presentation.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class DestinationController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class DestinationController : ControllerBase
+    private readonly IDestinationCrudService _destinationCrudService;
+    private readonly DestinationMapper _destinationMapper;
+    private readonly ILogger<DestinationController> _logger;
+
+    public DestinationController(ILogger<DestinationController> logger, IDestinationCrudService destinationCrudService,
+        DestinationMapper destinationMapper)
     {
-        private readonly ILogger<DestinationController> _logger;
-        private readonly IDestinationCRUDService _destinationCRUDService;
-        private readonly DestinationMapper _destinationMapper;
+        _logger = logger;
+        _destinationCrudService = destinationCrudService;
+        _destinationMapper = destinationMapper;
+    }
 
-        public DestinationController(ILogger<DestinationController> logger, IDestinationCRUDService destinationCRUDService, DestinationMapper destinationMapper)
-        {
-            _logger = logger;
-            _destinationCRUDService = destinationCRUDService;
-            _destinationMapper = destinationMapper;
-        }
+    [HttpGet]
+    public IActionResult Get()
+    {
+        var destinations = _destinationCrudService.GetAll();
+        if (destinations.Count == 0) return NoContent();
 
-        [HttpGet()]
-        public IActionResult Get()
-        {
-            List<Destination> destinations = _destinationCRUDService.GetAll();
-            if (destinations.Count == 0) { return NoContent(); }
+        _logger.LogInformation("GET ALL (Destination)");
+        return Ok(_destinationMapper.MapModelListToViewModelList(destinations));
+    }
 
-            _logger.LogInformation("GET ALL (Destination)");
-            return Ok(_destinationMapper.MapModelListToViewModelList(destinations));
-        }
+    [HttpGet("{id}")]
+    public IActionResult GetById(int id)
+    {
+        var destination = _destinationCrudService.GetById(id);
+        if (destination == null) return NotFound("Destination not found.");
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            Destination? destination = _destinationCRUDService.GetById(id);
-            if (destination == null) { return NotFound("Destination not found."); }
+        _logger.LogInformation("GET (Destination): " + destination);
+        return Ok(_destinationMapper.MapModelToViewModel(destination));
+    }
 
-            _logger.LogInformation("GET (Destination): " + destination.ToString());
-            return Ok(_destinationMapper.MapModelToViewModel(destination));
-        }
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var destination = _destinationCrudService.GetById(id);
+        if (destination == null) return NotFound("Destination not found.");
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            Destination? destination = _destinationCRUDService.GetById(id);
-            if (destination == null) { return NotFound("Destination not found."); }
+        _destinationCrudService.Delete(destination);
 
-            _destinationCRUDService.Delete(destination);
+        _logger.LogInformation("GET (Destination): " + destination);
+        return Ok("Destination deleted.");
+    }
 
-            _logger.LogInformation("GET (Destination): " + destination.ToString());
-            return Ok("Destination deleted.");
-        }
+    [HttpPost]
+    public IActionResult Post(DestinationWriteModel destinationWriteModel)
+    {
+        var destination = _destinationCrudService.Add(_destinationMapper.MapWriteModelToModel(destinationWriteModel));
 
-        [HttpPost()]
-        public IActionResult Post(DestinationWriteModel destinationWriteModel)
-        {
-            Destination destination = _destinationCRUDService.Add(_destinationMapper.MapWriteModelToModel(destinationWriteModel));
+        _logger.LogInformation("GET (Destination): " + destination);
+        return Ok(_destinationMapper.MapModelToViewModel(destination));
+    }
 
-            _logger.LogInformation("GET (Destination): " + destination.ToString());
-            return Ok(_destinationMapper.MapModelToViewModel(destination));
-        }
+    [HttpPut("{id}")]
+    public IActionResult Put(int id, [FromBody] DestinationWriteModel updatedDestinationWriteModel)
+    {
+        var destination = _destinationCrudService.GetById(id);
+        if (destination == null) return NotFound("Destination not found.");
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] DestinationWriteModel updatedDestinationWriteModel)
-        {
-            Destination? destination = _destinationCRUDService.GetById(id);
-            if (destination == null) { return NotFound("Destination not found."); }
+        var destinationUpdated = _destinationCrudService.Edit(destination,
+            _destinationMapper.MapWriteModelToModel(updatedDestinationWriteModel));
 
-            Destination destinationUpdated = _destinationCRUDService.Edit(destination, _destinationMapper.MapWriteModelToModel(updatedDestinationWriteModel));
-
-            _logger.LogInformation("UPDATE (Destination): " + destinationUpdated.ToString());
-            return Ok(_destinationMapper.MapModelToViewModel(destination));
-        }
+        _logger.LogInformation("UPDATE (Destination): " + destinationUpdated);
+        return Ok(_destinationMapper.MapModelToViewModel(destination));
     }
 }

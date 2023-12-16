@@ -2,7 +2,7 @@
 
 namespace Airplane.Domain.Interfaces.ClientInterfaces
 {
-    public interface IClientCRUDService
+    public interface IClientCrudService
     {
         List<Client> GetAll();
 

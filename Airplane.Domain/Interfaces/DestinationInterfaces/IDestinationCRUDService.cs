@@ -2,7 +2,7 @@
 
 namespace Airplane.Domain.Interfaces.DestinationInterfaces
 {
-    public interface IDestinationCRUDService
+    public interface IDestinationCrudService
     {
         List<Destination> GetAll();
 

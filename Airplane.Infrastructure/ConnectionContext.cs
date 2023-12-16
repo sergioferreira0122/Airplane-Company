@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace webAPI.Infrastructure
+namespace Airplane.Infrastructure
 {
     public class ConnectionContext : DbContext
     {
