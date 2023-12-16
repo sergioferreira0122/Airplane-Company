@@ -1,4 +1,4 @@
-﻿using Airplane.Domain.Entities;
+﻿using Airplane.Domain.Models;
 
 namespace Airplane.Domain.Interfaces.DestinationInterfaces
 {

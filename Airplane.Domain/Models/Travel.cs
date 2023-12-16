@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Airplane.Domain.Entities
+namespace Airplane.Domain.Models
 {
     public class Travel
     {

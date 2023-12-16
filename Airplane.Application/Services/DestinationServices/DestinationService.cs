@@ -1,7 +1,7 @@
-﻿using Airplane.Domain.Entities;
-using Airplane.Domain.Interfaces.DestinationInterfaces;
+﻿using Airplane.Domain.Interfaces.DestinationInterfaces;
+using Airplane.Domain.Models;
 
-namespace webAPI.Application.Services.DestinationServices
+namespace Airplane.Application.Services.DestinationServices
 {
     public class DestinationService : IDestinationCrudService
     {

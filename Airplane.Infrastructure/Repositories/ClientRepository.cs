@@ -1,5 +1,5 @@
-﻿using Airplane.Domain.Entities;
-using Airplane.Domain.Interfaces.ClientInterfaces;
+﻿using Airplane.Domain.Interfaces.ClientInterfaces;
+using Airplane.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Airplane.Infrastructure.Repositories

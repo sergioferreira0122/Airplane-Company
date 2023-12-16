@@ -3,11 +3,11 @@ using Airplane.Domain.Interfaces.DestinationInterfaces;
 using Airplane.Domain.Interfaces.TravelInterfaces;
 using Airplane.Infrastructure.Repositories;
 using System.Reflection;
+using Airplane.API.Presentation.Mappers;
+using Airplane.Application.Services.ClientServices;
+using Airplane.Application.Services.DestinationServices;
+using Airplane.Application.Services.TravelServices;
 using Airplane.Infrastructure;
-using webAPI.Application.Services.ClientServices;
-using webAPI.Application.Services.DestinationServices;
-using webAPI.Application.Services.TravelServices;
-using webAPI.Presentation.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 

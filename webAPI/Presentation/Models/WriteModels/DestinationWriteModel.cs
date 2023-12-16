@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace webAPI.Presentation.Models.WriteModels
+namespace Airplane.API.Presentation.Models.WriteModels
 {
     public class DestinationWriteModel
     {

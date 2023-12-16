@@ -1,7 +1,7 @@
-﻿using Airplane.Domain.Entities;
-using Airplane.Domain.Interfaces.ClientInterfaces;
+﻿using Airplane.Domain.Interfaces.ClientInterfaces;
+using Airplane.Domain.Models;
 
-namespace webAPI.Application.Services.ClientServices
+namespace Airplane.Application.Services.ClientServices
 {
     public class ClientService : IClientCrudService
     {

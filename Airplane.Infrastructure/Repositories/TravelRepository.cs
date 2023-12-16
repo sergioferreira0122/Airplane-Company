@@ -1,5 +1,5 @@
-﻿using Airplane.Domain.Entities;
-using Airplane.Domain.Interfaces.TravelInterfaces;
+﻿using Airplane.Domain.Interfaces.TravelInterfaces;
+using Airplane.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 

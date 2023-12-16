@@ -1,4 +1,4 @@
-﻿namespace Airplane.Domain.Entities
+﻿namespace Airplane.Domain.Models
 {
     public class ClientDestination
     {

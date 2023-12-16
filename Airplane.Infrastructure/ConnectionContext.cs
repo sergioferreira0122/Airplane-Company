@@ -1,4 +1,4 @@
-﻿using Airplane.Domain.Entities;
+﻿using Airplane.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

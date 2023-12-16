@@ -1,4 +1,4 @@
-﻿namespace webAPI.Presentation.Models.WriteModels
+﻿namespace Airplane.API.Presentation.Models.WriteModels
 {
     public class TravelWriteModel
     {

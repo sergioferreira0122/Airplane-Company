@@ -1,7 +1,7 @@
-﻿using Airplane.Domain.Entities;
-using Airplane.Domain.Interfaces.TravelInterfaces;
+﻿using Airplane.Domain.Interfaces.TravelInterfaces;
+using Airplane.Domain.Models;
 
-namespace webAPI.Application.Services.TravelServices
+namespace Airplane.Application.Services.TravelServices
 {
     public class TravelService : ITravelCrudServices, ITravelClientService
     {
