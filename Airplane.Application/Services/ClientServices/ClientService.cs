@@ -6,7 +6,6 @@ namespace Airplane.Application.Services.ClientServices
     public class ClientService : IClientCrudService
     {
         private readonly IClientRepository _clientRepository;
-
         public ClientService(IClientRepository clientRepository)
         {
             _clientRepository = clientRepository;
@@ -33,11 +32,9 @@ namespace Airplane.Application.Services.ClientServices
             return client;
         }
 
-        private static Client EditFields(Client updateClient, Client client)
+        private static void EditFields(Client updateClient, Client client)
         {
             client.Name = updateClient.Name;
-
-            return client;
         }
 
         public List<Client> GetAll()

@@ -35,13 +35,11 @@ namespace Airplane.Application.Services.TravelServices
             return travel;
         }
 
-        private static Travel EditFields(Travel updateTravel, Travel travel, Destination destination)
+        private static void EditFields(Travel updateTravel, Travel travel, Destination destination)
         {
             travel.Destination = destination;
             travel.StartDate = updateTravel.StartDate;
             travel.EndDate = updateTravel.EndDate;
-
-            return travel;
         }
 
         public List<Travel> GetAll()

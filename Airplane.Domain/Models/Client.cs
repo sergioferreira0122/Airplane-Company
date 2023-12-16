@@ -11,5 +11,7 @@ namespace Airplane.Domain.Models
 
         public ICollection<ClientTravel>? ClientTravels { get; set; }
         public ICollection<ClientDestination>? ClientDestinations { get; set; }
+
+
     }
 }

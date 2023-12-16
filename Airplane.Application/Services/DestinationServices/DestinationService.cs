@@ -33,12 +33,10 @@ namespace Airplane.Application.Services.DestinationServices
             return destination;
         }
 
-        private static Destination EditFields(Destination updateDestination, Destination destination)
+        private static void EditFields(Destination updateDestination, Destination destination)
         {
             destination.Price = updateDestination.Price;
             destination.Name = updateDestination.Name;
-
-            return destination;
         }
 
         public List<Destination> GetAll()
