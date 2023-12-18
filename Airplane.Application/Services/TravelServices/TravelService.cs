@@ -51,7 +51,7 @@ namespace Airplane.Application.Services.TravelServices
         {
             var travelFromRepository = _travelRepository.GetById(id);
 
-            return travelFromRepository ?? null;
+            return travelFromRepository;
         }
 
         public ClientTravel AddClient(Travel travel, Client client)

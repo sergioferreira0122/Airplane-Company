@@ -96,7 +96,7 @@ public class TravelController : ControllerBase
         return Ok(_travelMapper.MapModelToViewModel(travelUpdated));
     }
 
-    [HttpPut("add/client/{travelId}/{clientId}")]
+    [HttpPut("{travelId}/client/{clientId}")]
     public IActionResult AddClientToTravel(int travelId, int clientId)
     {
         var travel = _travelCrudServices.GetById(travelId);
@@ -111,7 +111,7 @@ public class TravelController : ControllerBase
         return Ok(_clientTravelMapper.MapClientTravelToClientTravelViewModel(clientTravelUpdated));
     }
 
-    [HttpPut("remove/client/{travelId}/{clientId}")]
+    [HttpDelete("{travelId}/client/{clientId}")]
     public IActionResult RemoveClientToTravel(int travelId, int clientId)
     {
         var travel = _travelCrudServices.GetById(travelId);

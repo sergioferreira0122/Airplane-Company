@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 //Connection
-builder.Services.AddTransient<ConnectionContext, ConnectionContext>();
+builder.Services.AddTransient<ConnectionContext>();
 //Connection
 
 //Repositories
@@ -29,10 +29,10 @@ builder.Services.AddTransient<ITravelRepository, TravelRepository>();
 //Repositories
 
 //Mappers
-builder.Services.AddTransient<ClientMapper, ClientMapper>();
-builder.Services.AddTransient<DestinationMapper, DestinationMapper>();
-builder.Services.AddTransient<TravelMapper, TravelMapper>();
-builder.Services.AddTransient<ClientTravelMapper, ClientTravelMapper>();
+builder.Services.AddTransient<ClientMapper>();
+builder.Services.AddTransient<DestinationMapper>();
+builder.Services.AddTransient<TravelMapper>();
+builder.Services.AddTransient<ClientTravelMapper>();
 //Mappers
 
 //Services

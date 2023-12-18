@@ -46,7 +46,7 @@ namespace Airplane.Application.Services.ClientServices
         {
             var clientFromRepository = _clientRepository.GetById(id);
 
-            return clientFromRepository ?? null;
+            return clientFromRepository;
         }
     }
 }

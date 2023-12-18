@@ -48,7 +48,7 @@ namespace Airplane.Application.Services.DestinationServices
         {
             var destinationFromRepository = _destinationRepository.GetById(id);
 
-            return destinationFromRepository ?? null;
+            return destinationFromRepository;
         }
     }
 }
