@@ -1,4 +1,3 @@
-using Airplane.API.Presentation.Controllers;
 using Airplane.API.Presentation.Mappers;
 using Airplane.API.Presentation.Models.ViewModels;
 using Airplane.Application.Services.ClientServices;
@@ -6,6 +5,7 @@ using Airplane.Domain.Interfaces.ClientInterfaces;
 using Airplane.Domain.Models;
 using Airplane.Infrastructure;
 using Airplane.Infrastructure.Repositories;
+using Airplane.Presentation.Controllers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

@@ -1,11 +1,12 @@
-﻿using Airplane.API.Presentation.Mappers;
-using Airplane.API.Presentation.Models.WriteModels;
-using Airplane.Domain.Interfaces.ClientInterfaces;
+﻿using Airplane.Domain.Interfaces.ClientInterfaces;
 using Airplane.Domain.Interfaces.DestinationInterfaces;
 using Airplane.Domain.Interfaces.TravelInterfaces;
+using Airplane.Presentation.Mappers;
+using Airplane.Presentation.Models.WriteModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
-namespace Airplane.API.Presentation.Controllers;
+namespace Airplane.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

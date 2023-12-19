@@ -1,4 +1,4 @@
-﻿namespace Airplane.API.Presentation.Models.ViewModels
+﻿namespace Airplane.Presentation.Models.ViewModels
 {
     public class TravelViewModel
     {

@@ -20,8 +20,8 @@
     <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Airplane.Application\Airplane.Application.csproj" />
-    <ProjectReference Include="..\Airplane.Infrastructure\Airplane.Infrastructure.csproj" />
+    <ProjectReference Include="..\Airplane.Presentation\Airplane.Presentation.csproj" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
-﻿using Airplane.API.Presentation.Models.ViewModels;
-using Airplane.Domain.Models;
+﻿using Airplane.Domain.Models;
+using Airplane.Presentation.Models.ViewModels;
 
-namespace Airplane.API.Presentation.Mappers
+namespace Airplane.Presentation.Mappers
 {
     public class ClientTravelMapper
     {

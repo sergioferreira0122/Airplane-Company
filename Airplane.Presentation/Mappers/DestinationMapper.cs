@@ -1,8 +1,8 @@
-﻿using Airplane.API.Presentation.Models.ViewModels;
-using Airplane.API.Presentation.Models.WriteModels;
-using Airplane.Domain.Models;
+﻿using Airplane.Domain.Models;
+using Airplane.Presentation.Models.ViewModels;
+using Airplane.Presentation.Models.WriteModels;
 
-namespace Airplane.API.Presentation.Mappers;
+namespace Airplane.Presentation.Mappers;
 
 public class DestinationMapper
 {

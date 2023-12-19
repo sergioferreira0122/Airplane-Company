@@ -3,11 +3,13 @@ using Airplane.Domain.Interfaces.DestinationInterfaces;
 using Airplane.Domain.Interfaces.TravelInterfaces;
 using Airplane.Infrastructure.Repositories;
 using System.Reflection;
-using Airplane.API.Presentation.Mappers;
+using Airplane.Application;
 using Airplane.Application.Services.ClientServices;
 using Airplane.Application.Services.DestinationServices;
 using Airplane.Application.Services.TravelServices;
 using Airplane.Infrastructure;
+using Airplane.Presentation;
+using Airplane.Presentation.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,29 +20,9 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
 });
 
-//Connection
-builder.Services.AddTransient<ConnectionContext>();
-//Connection
-
-//Repositories
-builder.Services.AddTransient<IClientRepository, ClientRepository>();
-builder.Services.AddTransient<IDestinationRepository, DestinationRepository>();
-builder.Services.AddTransient<ITravelRepository, TravelRepository>();
-//Repositories
-
-//Mappers
-builder.Services.AddTransient<ClientMapper>();
-builder.Services.AddTransient<DestinationMapper>();
-builder.Services.AddTransient<TravelMapper>();
-builder.Services.AddTransient<ClientTravelMapper>();
-//Mappers
-
-//Services
-builder.Services.AddTransient<IClientCrudService, ClientService>();
-builder.Services.AddTransient<IDestinationCrudService, DestinationService>();
-builder.Services.AddTransient<ITravelCrudServices, TravelService>();
-builder.Services.AddTransient<ITravelClientService, TravelService>();
-//Services
+builder.Services.AddInfrastructure();
+builder.Services.AddPresentation();
+builder.Services.AddApplication();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
