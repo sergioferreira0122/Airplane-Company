@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Airplane.Application\Airplane.Application.csproj" />
-    <ProjectReference Include="..\Airplane.Infrastructure\Airplane.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

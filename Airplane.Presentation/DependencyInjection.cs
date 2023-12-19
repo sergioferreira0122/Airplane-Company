@@ -1,9 +1,4 @@
-﻿using Airplane.Domain.Interfaces.ClientInterfaces;
-using Airplane.Domain.Interfaces.DestinationInterfaces;
-using Airplane.Domain.Interfaces.TravelInterfaces;
-using Airplane.Infrastructure.Repositories;
-using Airplane.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Airplane.Presentation.Mappers;
 
 namespace Airplane.Presentation
